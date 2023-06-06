@@ -489,10 +489,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>244.4万</span></span>
+                        <span>244.7万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>7.4万</span></span></p>
+                        <span>7.5万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -2020,85 +2020,6 @@
       </tags>
   </entry>
   <entry>
-    <title>linux以及windows配置redis</title>
-    <url>//2023/06/04/2023-06-04-linux%E4%BB%A5%E5%8F%8Awindows%E9%85%8D%E7%BD%AEredis/</url>
-    <content><![CDATA[<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><h2 id="linux下载"><a href="#linux下载" class="headerlink" title="linux下载"></a>linux下载</h2><blockquote>
-<p><a href="https://redis.io/docs/getting-started/">https://redis.io/docs/getting-started/</a></p>
-</blockquote>
-<h2 id="windows下载"><a href="#windows下载" class="headerlink" title="windows下载"></a>windows下载</h2><blockquote>
-<p><a href="https://github.com/MicrosoftArchive/redis/releases">https://github.com/MicrosoftArchive/redis/releases</a></p>
-</blockquote>
-<h2 id="linux编译"><a href="#linux编译" class="headerlink" title="linux编译"></a>linux编译</h2><ol>
-<li>先<code>押解</code>压缩包<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-4.0.0.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure></li>
-<li>然后安装Redis的依赖环境<code>gcc</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure></li>
-<li>进入 &#x2F;usr&#x2F;local&#x2F;redis-4.0.0进行<code>编译</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure></li>
-<li>进入redis的<code>src</code>目录中，进行安装<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></li>
-</ol>
-<blockquote>
-<p>注意，以上四步只在第一次安装执行<br>5. 在src目录下，运行redis.server 默认端口号为 6379</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis.server</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>ok 启动完成</li>
-</ul>
-<h2 id="windows启动"><a href="#windows启动" class="headerlink" title="windows启动"></a>windows启动</h2><p>打开redis根目录</p>
-<ol>
-<li>双击 <code>redis-server.exe</code></li>
-<li>双击 <code>redis-cli.exe</code></li>
-</ol>
-<ul>
-<li>ok运行完成</li>
-</ul>
-<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><h2 id="开启登录密码校验"><a href="#开启登录密码校验" class="headerlink" title="开启登录密码校验"></a>开启登录密码校验</h2><blockquote>
-<p>redis安装后默认是不需要密码的，但是这样是不安全的，所有我们在<code>配置</code>文件中修改，打开密码校验</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /usr/local/你的redis目录/src/redis.conf</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过搜索找到密码配置<ul>
-<li>进入文件中后<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/pass  或  /requirepass</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>未打开时，这是一个<code>注释</code>，看清楚奥<br><img src="https://pic.imgdb.cn/item/647c3dd6f024cca17395f74e.jpg"></p>
-</blockquote>
-<ul>
-<li><p>找到后按 <code>i</code> 进去编辑模式，注释去掉，然后 <code>requirepass</code> 后面就是你修改的密码</p>
-</li>
-<li><p>修改后按<code>esc</code> + <code>:wq </code>保存并退出</p>
-</li>
-<li><p>然后再次打开redis服务就会需要密码了</p>
-</li>
-<li><p>验证一下<br><img src="https://pic.imgdb.cn/item/647c3f29f024cca17398aba8.jpg"></p>
-</li>
-</ul>
-<h2 id="打开远程连接"><a href="#打开远程连接" class="headerlink" title="打开远程连接"></a>打开远程连接</h2><blockquote>
-<p>刚安装的redis默认只能有当前服务器连接，不支持远程连接，我们需要修改配置<br>在windows中redis的根目录下试验一下<br><img src="https://pic.imgdb.cn/item/647c40e3f024cca1739e6351.jpg"></p>
-</blockquote>
-<p>果然</p>
-<ul>
-<li>还是修改conf文件<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>进入文件后 输入 <code>/bind</code> 搜索</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/bind</span><br></pre></td></tr></table></figure>
-<p>找到它，注释掉<br><img src="https://pic.imgdb.cn/item/647c4163f024cca173a13625.jpg"></p>
-<ul>
-<li>重启redis,先找到它，然后<code>干掉</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef |grep redis</span><br><span class="line">kill -9 你redis的进程号</span><br></pre></td></tr></table></figure>
-<img src="https://pic.imgdb.cn/item/647c42e0f024cca173a9aab4.jpg"></li>
-</ul>
-<p>最后<code>关闭防火墙</code>或者<code>设置好端口号</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent #开放6379端口</span><br><span class="line">firewall-cmd --reload   # 重启防火墙</span><br></pre></td></tr></table></figure>
-
-<p>windows校验<br><img src="https://pic.imgdb.cn/item/647c45c4f024cca173b17ab3.jpg"></p>
-]]></content>
-      <tags>
-        <tag>linux</tag>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Android_Studio安装</title>
     <url>//2023/06/04/2023-06-04-Android-Studio%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<blockquote>
@@ -2449,6 +2370,85 @@
 </ul>
 ]]></content>
       <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux以及windows配置redis</title>
+    <url>//2023/06/04/2023-06-04-linux%E4%BB%A5%E5%8F%8Awindows%E9%85%8D%E7%BD%AEredis/</url>
+    <content><![CDATA[<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><h2 id="linux下载"><a href="#linux下载" class="headerlink" title="linux下载"></a>linux下载</h2><blockquote>
+<p><a href="https://redis.io/docs/getting-started/">https://redis.io/docs/getting-started/</a></p>
+</blockquote>
+<h2 id="windows下载"><a href="#windows下载" class="headerlink" title="windows下载"></a>windows下载</h2><blockquote>
+<p><a href="https://github.com/MicrosoftArchive/redis/releases">https://github.com/MicrosoftArchive/redis/releases</a></p>
+</blockquote>
+<h2 id="linux编译"><a href="#linux编译" class="headerlink" title="linux编译"></a>linux编译</h2><ol>
+<li>先<code>押解</code>压缩包<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-4.0.0.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure></li>
+<li>然后安装Redis的依赖环境<code>gcc</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure></li>
+<li>进入 &#x2F;usr&#x2F;local&#x2F;redis-4.0.0进行<code>编译</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure></li>
+<li>进入redis的<code>src</code>目录中，进行安装<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>注意，以上四步只在第一次安装执行<br>5. 在src目录下，运行redis.server 默认端口号为 6379</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis.server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ok 启动完成</li>
+</ul>
+<h2 id="windows启动"><a href="#windows启动" class="headerlink" title="windows启动"></a>windows启动</h2><p>打开redis根目录</p>
+<ol>
+<li>双击 <code>redis-server.exe</code></li>
+<li>双击 <code>redis-cli.exe</code></li>
+</ol>
+<ul>
+<li>ok运行完成</li>
+</ul>
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><h2 id="开启登录密码校验"><a href="#开启登录密码校验" class="headerlink" title="开启登录密码校验"></a>开启登录密码校验</h2><blockquote>
+<p>redis安装后默认是不需要密码的，但是这样是不安全的，所有我们在<code>配置</code>文件中修改，打开密码校验</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /usr/local/你的redis目录/src/redis.conf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过搜索找到密码配置<ul>
+<li>进入文件中后<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/pass  或  /requirepass</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>未打开时，这是一个<code>注释</code>，看清楚奥<br><img src="https://pic.imgdb.cn/item/647c3dd6f024cca17395f74e.jpg"></p>
+</blockquote>
+<ul>
+<li><p>找到后按 <code>i</code> 进去编辑模式，注释去掉，然后 <code>requirepass</code> 后面就是你修改的密码</p>
+</li>
+<li><p>修改后按<code>esc</code> + <code>:wq </code>保存并退出</p>
+</li>
+<li><p>然后再次打开redis服务就会需要密码了</p>
+</li>
+<li><p>验证一下<br><img src="https://pic.imgdb.cn/item/647c3f29f024cca17398aba8.jpg"></p>
+</li>
+</ul>
+<h2 id="打开远程连接"><a href="#打开远程连接" class="headerlink" title="打开远程连接"></a>打开远程连接</h2><blockquote>
+<p>刚安装的redis默认只能有当前服务器连接，不支持远程连接，我们需要修改配置<br>在windows中redis的根目录下试验一下<br><img src="https://pic.imgdb.cn/item/647c40e3f024cca1739e6351.jpg"></p>
+</blockquote>
+<p>果然</p>
+<ul>
+<li>还是修改conf文件<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>进入文件后 输入 <code>/bind</code> 搜索</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/bind</span><br></pre></td></tr></table></figure>
+<p>找到它，注释掉<br><img src="https://pic.imgdb.cn/item/647c4163f024cca173a13625.jpg"></p>
+<ul>
+<li>重启redis,先找到它，然后<code>干掉</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef |grep redis</span><br><span class="line">kill -9 你redis的进程号</span><br></pre></td></tr></table></figure>
+<img src="https://pic.imgdb.cn/item/647c42e0f024cca173a9aab4.jpg"></li>
+</ul>
+<p>最后<code>关闭防火墙</code>或者<code>设置好端口号</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent #开放6379端口</span><br><span class="line">firewall-cmd --reload   # 重启防火墙</span><br></pre></td></tr></table></figure>
+
+<p>windows校验<br><img src="https://pic.imgdb.cn/item/647c45c4f024cca173b17ab3.jpg"></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
         <tag>redis</tag>
       </tags>
   </entry>
