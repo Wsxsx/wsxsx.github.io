@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>FirstBlog</title>
-    <url>//2023/05/06/2023-05-06-FirstBlog/</url>
+    <url>//2023/05/06/FirstBlog/</url>
     <content><![CDATA[<h2 id="第一篇文章"><a href="#第一篇文章" class="headerlink" title="第一篇文章"></a>第一篇文章</h2><h2 id="乱七八糟搞了两天，卸载重装无数遍，折磨疯了要！"><a href="#乱七八糟搞了两天，卸载重装无数遍，折磨疯了要！" class="headerlink" title="乱七八糟搞了两天，卸载重装无数遍，折磨疯了要！"></a>乱七八糟搞了两天，卸载重装无数遍，折磨疯了要！</h2><h2 id="不过，最终还是搞好了，成就感还是大大滴有！"><a href="#不过，最终还是搞好了，成就感还是大大滴有！" class="headerlink" title="不过，最终还是搞好了，成就感还是大大滴有！"></a>不过，最终还是搞好了，成就感还是大大滴有！</h2><h2 id="感谢驴驴一直陪着我，哈哈！"><a href="#感谢驴驴一直陪着我，哈哈！" class="headerlink" title="感谢驴驴一直陪着我，哈哈！"></a>感谢驴驴一直陪着我，哈哈！</h2>]]></content>
       <categories>
         <category>生活小记</category>
@@ -473,7 +473,7 @@
   </entry>
   <entry>
     <title>瑞吉外卖</title>
-    <url>//2023/05/30/2023-05-30-%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/</url>
+    <url>//2023/05/30/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p> 在此特别感谢黑马程序员提供的教程:</p>
 <div class="bvideo"><a href="//www.bilibili.com/video/BV13a411q753" target="_blank">
         <div class="bvideo-box">
@@ -489,7 +489,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>245.9万</span></span>
+                        <span>247.1万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>7.5万</span></span></p>
@@ -2760,5 +2760,123 @@ mysql-bin.000001 |     1200</li>
       <tags>
         <tag>实战项目</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Swagger</title>
+    <url>//2023/06/10/Swagger/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，再通过Swagger衍生出来的一系列项目和工具就可以做到生成各种格式的接口文档，以及在线接口调试页面等等。</p>
+<blockquote>
+<p>官网：<a href="https://swagger.io/">https://swagger.io/</a></p>
+</blockquote>
+<p>knife4j是为Java MVC框架<code>集成Swagger</code>生成Api文档的增强解决方案</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
+<li>操作步骤<ol>
+<li><p>导入knife4j的maven坐标</p>
+  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>导入knife4j相关配置类,加上 <code>@EnableSwagger2</code>、 <code>@EnableKnife4j</code>注解</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">      <span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Docket <span class="title function_">createRestApi</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 文档类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .select()</span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.yin.reggie.controller&quot;</span>))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">            .title(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">            .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">            .description(<span class="string">&quot;hello接口文档&quot;</span>)</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置静态资源，否则接口文档界面无法访问</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置静态资源映射</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> &#123;</span><br><span class="line">    log.info(<span class="string">&quot;开始进行静态资源映射...&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;doc.html&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;/webjars/**&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在LoginCheckFilter中设置不需要处理的请求路径</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h1><table>
+<thead>
+<tr>
+<th align="left">注解</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">@Api</td>
+<td align="center">用在请求的类上，例如controller，表示对类的说明</td>
+</tr>
+<tr>
+<td align="left">@Apimodel</td>
+<td align="center">用在类上，通常是实体类，表示一个返回响应数据的信息</td>
+</tr>
+<tr>
+<td align="left">@ApimodelProperty</td>
+<td align="center">用在属性上，描述响应类的属性</td>
+</tr>
+<tr>
+<td align="left">@ApiOperation</td>
+<td align="center">用在请求的方法上，说明方法的用途，作用</td>
+</tr>
+<tr>
+<td align="left">@ApilmplicitParams</td>
+<td align="center">用在请求的方法上，表示一组参数说明</td>
+</tr>
+<tr>
+<td align="left">@ApilmplicitParam</td>
+<td align="center">用在@ApilmplicitParams注解中，指定一个请求参数的各个方面</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>YApi</title>
+    <url>//2023/06/10/YApi/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>&amp;emsp;&amp;emsp;YApi 是高效、易用、功能强大的 api管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务。可以帮助开发者轻松创建、发布、维护 APL，YApi 还为用户提供了优秀的交互体验，开发人员只需利用平台提供的接口数据写入工具以及简单的点击操作就可以实现接口的管理。YApi让接口开发更简单高效，让接口的管理更具可读性、可维护性，让团队协作更合理<br><br></p>
+<blockquote>
+<p>源码地址: <a href="https://github.com/YMFE/yapi">https://github.com/YMFE/yapi</a></p>
+</blockquote>
+<br>
+要使用API，需要自己进行部署
+<br>
+<br>
+
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a><strong>使用方式</strong></h1><p>使用Yapi，可以执行下面的操作</p>
+<ul>
+<li>添加项目</li>
+<li>添加分类</li>
+<li>添加接口</li>
+<li>编辑接口</li>
+<li>查看接口</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是前后端分离开发</title>
+    <url>//2023/06/10/%E4%BB%80%E4%B9%88%E6%98%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong><center>介绍</center></strong></h3><br>
+ 
+<p><strong>前后端分离开发</strong>，就是在项目开发过程中，对于前端代码的开发由专门的<strong>前端开发人员</strong>负责，后端代码则由<strong>后端开发人员</strong>负责，这样可以做到分工明确、各司其职，提高开发效率，前后端代码并行开发，可以加快项目开发进度。目前，前后端分离开发方式已经被越来越多的公司所采用，成为当前项目开发的主流开发方式。</p>
+<p>前后端分离开发后，从工程机构上也会发生变化，即前后端代码不再混合在同一个maven工程中，而是分为<strong>前端工程</strong>和<strong>后端工程</strong>。<br><img src="https://pic.imgdb.cn/item/6483d4491ddac507cc1343b5.jpg"></p>
+<br>
+<br>
+<br>
+
+<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a><strong><center>开发流程</center></strong></h3><p>&amp;emsp;&amp;emsp;前后端分离开发后，面临一个问题，就是前端开发人员和后端开发人员如何进行配合来共同开发一个项目？可以按照如下流程进行:<br><img src="https://pic.imgdb.cn/item/6483d5071ddac507cc13fc80.jpg"></p>
+<ul>
+<li><strong>接口(API接口)</strong> 就是一个http的请求地址，主要就是去定义:请求路径、请求方式、请求参数、响应数据等内容。</li>
+</ul>
+<p><strong><center>前端技术栈</center></strong><br><strong>开发工具</strong></p>
+<ul>
+<li>Visual Studio Code</li>
+<li>hbuilder</li>
+</ul>
+<p><strong>技术框架</strong></p>
+<ul>
+<li>nodejs</li>
+<li>VUE</li>
+<li>ElementUI</li>
+<li>mock</li>
+<li>webpack</li>
+</ul>
+]]></content>
   </entry>
 </search>
