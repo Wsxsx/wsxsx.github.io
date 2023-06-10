@@ -472,6 +472,610 @@
       </tags>
   </entry>
   <entry>
+    <title>Android_Studio安装</title>
+    <url>//2023/06/04/2023-06-04-Android-Studio%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<blockquote>
+<p>学校的移动应用开发课程，不得已下一个，记录一下<br>还是得吐槽一下老师，绝了，混子</p>
+</blockquote>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><ol>
+<li>官网下载<blockquote>
+<p>官网：<a href="https://developer.android.google.cn/studio">https://developer.android.google.cn/studio</a></p>
+</blockquote>
+</li>
+<li>随便在哪下，跑起来就行不是吗</li>
+</ol>
+<p>我下的版本是2022.1</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><p>打开安装包点击next<br><img src="https://pic.imgdb.cn/item/647c707c1ddac507cc08a7c1.jpg"></p>
+</li>
+<li><p>继续next，打勾那个是安卓虚拟设备，记得<code>勾上</code><br><img src="https://pic.imgdb.cn/item/647c717d1ddac507cc098e9d.jpg"></p>
+</li>
+<li><p>更换安装位置，别做c盘战士就是了，继续next<br><img src="https://pic.imgdb.cn/item/647c71a21ddac507cc09b20f.jpg"></p>
+</li>
+<li><p>Install，左下角打勾的地方是不创建快捷方式，一般没必要<br><img src="https://pic.imgdb.cn/item/647c71f41ddac507cc0a004e.jpg"></p>
+</li>
+<li><p>ok<br><img src="https://pic.imgdb.cn/item/647c72501ddac507cc0a5176.jpg"></p>
+</li>
+</ol>
+<ul>
+<li><p>打开Android Studio</p>
+</li>
+<li><p>安装谷歌什么的，<code>不需要</code><br><img src="https://pic.imgdb.cn/item/647c7ba91ddac507cc1f1550.jpg"></p>
+</li>
+</ul>
+<h1 id="下载SDK"><a href="#下载SDK" class="headerlink" title="下载SDK"></a>下载SDK</h1><blockquote>
+<p>SDK全称为Software Development kit,就是<code>软件开发工具包</code>,可以将app源码编译为可执行的app应用</p>
+</blockquote>
+<ul>
+<li><p>提示需要安装<code>SDK</code><br><img src="https://pic.imgdb.cn/item/647c7b461ddac507cc1e78ef.jpg"></p>
+</li>
+<li><p>选 <code>custom</code><br><img src="https://pic.imgdb.cn/item/647c7c941ddac507cc207720.jpg"></p>
+</li>
+<li><p>选界面，进去也可以调，随意选<br><img src="https://pic.imgdb.cn/item/647c7cbd1ddac507cc20c20c.jpg"></p>
+</li>
+<li><p>安装SDK，除了<code>安装位置</code>，其他默认即可 （看着我的眼睛，不要做c盘战士好吗）<br><img src="https://pic.imgdb.cn/item/647c7d7c1ddac507cc225071.jpg"></p>
+</li>
+<li><p>这里是虚拟机的内存，学习两个G也够用了<br><img src="https://pic.imgdb.cn/item/647c7e031ddac507cc23430a.jpg"></p>
+</li>
+<li><p>提示要安装这个，next即可<br><img src="https://pic.imgdb.cn/item/647c7e6f1ddac507cc23db61.jpg"></p>
+</li>
+<li><p>要下载SDK，next即可<br><img src="https://pic.imgdb.cn/item/647c7eb01ddac507cc243b9a.jpg"></p>
+</li>
+<li><p>一定一定要选Accept，最后一个好像是Intel硬件加速什么的，我也点了，前两个<code>必选Accept</code>,选完Finish<br><img src="https://pic.imgdb.cn/item/647c7f001ddac507cc24b2b7.jpg"></p>
+</li>
+<li><p>稍等一会，安装中<br><img src="https://pic.imgdb.cn/item/647c7f671ddac507cc2558a8.jpg"></p>
+</li>
+<li><p>下载完点击finish，进入到新建工程界面<br><img src="https://pic.imgdb.cn/item/647c80cb1ddac507cc274f48.jpg"></p>
+</li>
+</ul>
+<blockquote>
+<p>这就差不多ok了</p>
+</blockquote>
+<h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><ul>
+<li><p>这里新建一个项目<br><img src="https://pic.imgdb.cn/item/647c811b1ddac507cc27b40d.jpg"></p>
+</li>
+<li><p>选这个<br><img src="https://pic.imgdb.cn/item/647c813c1ddac507cc27dee8.jpg"></p>
+</li>
+<li><p>默认位置改一下，默认语言改为<code>java</code>，然后<code>finish</code><br><img src="https://pic.imgdb.cn/item/647c81b21ddac507cc2876ac.jpg"></p>
+</li>
+<li><p>然后就会默认创建一个工程<br><img src="https://pic.imgdb.cn/item/647c821b1ddac507cc28fe02.jpg"></p>
+</li>
+</ul>
+<h1 id="安装安卓模拟器，"><a href="#安装安卓模拟器，" class="headerlink" title="安装安卓模拟器，"></a>安装安卓模拟器，</h1><ul>
+<li><p>点击<code>Device Manager</code><br><img src="https://pic.imgdb.cn/item/647c82791ddac507cc296bbc.jpg"></p>
+</li>
+<li><p>点击，都是外观，我这里选择的是 Pixel 4，选择完 next<br><img src="https://pic.imgdb.cn/item/647c83021ddac507cc2a2ff8.jpg"></p>
+</li>
+<li><p>版本我选择的13<br><img src="https://pic.imgdb.cn/item/647c84221ddac507cc2bdd83.jpg"></p>
+</li>
+<li><p>安装，点击下载键<br><img src="https://pic.imgdb.cn/item/647c84681ddac507cc2c6856.jpg"></p>
+</li>
+<li><p>无脑finish<br><img src="https://pic.imgdb.cn/item/647c852f1ddac507cc2dd8df.jpg"></p>
+</li>
+<li><p>点击启动键<br><img src="https://pic.imgdb.cn/item/647c857e1ddac507cc2e4f8e.jpg"></p>
+</li>
+<li><p>如果想要这种界面的模拟器，不需要就略过</p>
+<blockquote>
+<p>左上角点击<code>File</code> -&gt; 点击 <code>Settings</code>或者<code>Ctrl + Alt + s</code> -&gt; 搜索栏搜索 <code>Emulator</code> -&gt; 将 <code>Launuch in a tool window</code> 的复选框<code>对勾去掉</code> -&gt; 设置框右下角 <code>apply</code> -&gt; <code>ok</code> -&gt; 重新启动 Android Studio 即可<br><img src="https://pic.imgdb.cn/item/647c883c1ddac507cc339837.jpg"></p>
+</blockquote>
+</li>
+<li><p>重启完成后运行模拟器，然后点击<br><img src="https://pic.imgdb.cn/item/647c899c1ddac507cc35330e.jpg"></p>
+</li>
+<li><p>效果如图,ok了<br><img src="https://pic.imgdb.cn/item/647c89ba1ddac507cc3559d6.jpg"></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux以及windows配置redis</title>
+    <url>//2023/06/04/2023-06-04-linux%E4%BB%A5%E5%8F%8Awindows%E9%85%8D%E7%BD%AEredis/</url>
+    <content><![CDATA[<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><h2 id="linux下载"><a href="#linux下载" class="headerlink" title="linux下载"></a>linux下载</h2><blockquote>
+<p><a href="https://redis.io/docs/getting-started/">https://redis.io/docs/getting-started/</a></p>
+</blockquote>
+<h2 id="windows下载"><a href="#windows下载" class="headerlink" title="windows下载"></a>windows下载</h2><blockquote>
+<p><a href="https://github.com/MicrosoftArchive/redis/releases">https://github.com/MicrosoftArchive/redis/releases</a></p>
+</blockquote>
+<h2 id="linux编译"><a href="#linux编译" class="headerlink" title="linux编译"></a>linux编译</h2><ol>
+<li>先<code>押解</code>压缩包<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-4.0.0.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure></li>
+<li>然后安装Redis的依赖环境<code>gcc</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure></li>
+<li>进入 &#x2F;usr&#x2F;local&#x2F;redis-4.0.0进行<code>编译</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure></li>
+<li>进入redis的<code>src</code>目录中，进行安装<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>注意，以上四步只在第一次安装执行<br>5. 在src目录下，运行redis.server 默认端口号为 6379</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis.server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ok 启动完成</li>
+</ul>
+<h2 id="windows启动"><a href="#windows启动" class="headerlink" title="windows启动"></a>windows启动</h2><p>打开redis根目录</p>
+<ol>
+<li>双击 <code>redis-server.exe</code></li>
+<li>双击 <code>redis-cli.exe</code></li>
+</ol>
+<ul>
+<li>ok运行完成</li>
+</ul>
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><h2 id="开启登录密码校验"><a href="#开启登录密码校验" class="headerlink" title="开启登录密码校验"></a>开启登录密码校验</h2><blockquote>
+<p>redis安装后默认是不需要密码的，但是这样是不安全的，所有我们在<code>配置</code>文件中修改，打开密码校验</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /usr/local/你的redis目录/src/redis.conf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过搜索找到密码配置<ul>
+<li>进入文件中后<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/pass  或  /requirepass</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>未打开时，这是一个<code>注释</code>，看清楚奥<br><img src="https://pic.imgdb.cn/item/647c3dd6f024cca17395f74e.jpg"></p>
+</blockquote>
+<ul>
+<li><p>找到后按 <code>i</code> 进去编辑模式，注释去掉，然后 <code>requirepass</code> 后面就是你修改的密码</p>
+</li>
+<li><p>修改后按<code>esc</code> + <code>:wq </code>保存并退出</p>
+</li>
+<li><p>然后再次打开redis服务就会需要密码了</p>
+</li>
+<li><p>验证一下<br><img src="https://pic.imgdb.cn/item/647c3f29f024cca17398aba8.jpg"></p>
+</li>
+</ul>
+<h2 id="打开远程连接"><a href="#打开远程连接" class="headerlink" title="打开远程连接"></a>打开远程连接</h2><blockquote>
+<p>刚安装的redis默认只能有当前服务器连接，不支持远程连接，我们需要修改配置<br>在windows中redis的根目录下试验一下<br><img src="https://pic.imgdb.cn/item/647c40e3f024cca1739e6351.jpg"></p>
+</blockquote>
+<p>果然</p>
+<ul>
+<li>还是修改conf文件<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>进入文件后 输入 <code>/bind</code> 搜索</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/bind</span><br></pre></td></tr></table></figure>
+<p>找到它，注释掉<br><img src="https://pic.imgdb.cn/item/647c4163f024cca173a13625.jpg"></p>
+<ul>
+<li>重启redis,先找到它，然后<code>干掉</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef |grep redis</span><br><span class="line">kill -9 你redis的进程号</span><br></pre></td></tr></table></figure>
+<img src="https://pic.imgdb.cn/item/647c42e0f024cca173a9aab4.jpg"></li>
+</ul>
+<p>最后<code>关闭防火墙</code>或者<code>设置好端口号</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent #开放6379端口</span><br><span class="line">firewall-cmd --reload   # 重启防火墙</span><br></pre></td></tr></table></figure>
+
+<p>windows校验<br><img src="https://pic.imgdb.cn/item/647c45c4f024cca173b17ab3.jpg"></p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>瑞吉外卖优化篇</title>
+    <url>//2023/06/07/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%96%E7%AF%87/</url>
+    <content><![CDATA[<p>在此特别感谢黑马程序员提供的教程:</p>
+<div class="bvideo"><a href="//www.bilibili.com/video/BV13a411q753" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://pic1.xuehuaimg.com/proxy/http://i0.hdslb.com/bfs/archive/66e8947b3c48d6710c93d572ebc91f27bf4db9fc.png)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">32:16:10</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot + mybatis plus开发核心技术的真java实战项目</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>246.9万</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>7.5万</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">黑马程序员</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a></div>
+
+<blockquote>
+<p>本文是瑞吉外卖项目的优化篇<br>直接开始</p>
+</blockquote>
+<h1 id="上传git"><a href="#上传git" class="headerlink" title="上传git"></a>上传git</h1><ol>
+<li><p>将之前做好的项目上传到github或gitee，然后新建一个<code>分支</code>，接下来所有的操作都在新建的分支上操作，最后<code>合并</code>分支即可</p>
+<blockquote>
+<p>上传就不放上来了，如果忘了可以回去看看</p>
+</blockquote>
+</li>
+<li><p>上传完后，在新建的<code>v1.0</code>分支上进行<code>redis</code>的环境配置</p>
+</li>
+</ol>
+<h1 id="项目redis环境配置"><a href="#项目redis环境配置" class="headerlink" title="项目redis环境配置"></a>项目redis环境配置</h1><h2 id="配置pom文件"><a href="#配置pom文件" class="headerlink" title="配置pom文件"></a>配置pom文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="新增redis配置类"><a href="#新增redis配置类" class="headerlink" title="新增redis配置类"></a>新增redis配置类</h2><ul>
+<li>因为springboot的自动配置会将key和value做些更改，所以将key的配置改一下<br><img src="https://pic.imgdb.cn/item/64800e901ddac507cc7a50b5.jpg"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis配置类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span>  <span class="title class_">RedisConfig</span> <span class="keyword">extends</span> <span class="title class_">CachingConfigurerSupport</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Object,Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory connectionFactory)</span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object,Object&gt; redisTemplate = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="yml配置文件添加配置项"><a href="#yml配置文件添加配置项" class="headerlink" title="yml配置文件添加配置项"></a>yml配置文件添加配置项</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">localhost</span>  <span class="comment">#redis服务器的ip,如果是本地可以直接用 localhost,方便后续观察调试</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">6379</span>        <span class="comment">#redis的端口号，默认为6379</span></span><br><span class="line">      <span class="attr">password:</span>         <span class="comment">#自己设置的redis密码，localhost 可以不填密码</span></span><br><span class="line">      <span class="attr">database:</span> <span class="number">0</span>       <span class="comment">#默认0号数据库</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
+<li>配置完成后，上传到v1.0分支，在网页上刷新切换分支验证一下<br><img src="https://pic.imgdb.cn/item/648010901ddac507cc7d3cb5.jpg"></li>
+</ul>
+<blockquote>
+<p>ok，这就配置好了</p>
+</blockquote>
+<h1 id="缓存短信验证码优化"><a href="#缓存短信验证码优化" class="headerlink" title="缓存短信验证码优化"></a>缓存短信验证码优化</h1><blockquote>
+<p>之前用的是 <code>session</code> 存储验证码，而 session 的默认存活时间是<code>三十分钟</code>，显然不符合验证码的逻辑，现在改造为将验证码缓存在<code>redis</code>中</p>
+</blockquote>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><ol>
+<li>在服务端 <code>UserController</code> 中注入 <code>RedisTemplate </code>对象，用于操作redis</li>
+<li>在服务端 <code>UserController</code> 的 <code>sendMsg</code> 方法中，将随机生成的验证码缓存到 redis 中，并设置有效期<code>5</code>分钟</li>
+<li>在服务端 <code>UserController</code> 的 <code>login</code> 方法中， 从 redis 中获取缓存的验证码，如果登录成功则<code>删除</code>redis的验证码</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li>在 <code>UserServiceImpl</code> 中 注入 <code>RedisTemplate</code>,将验证码存入 redis 中，并设置有效时间</li>
+</ul>
+<p><code>UserServiceImpl</code> 的 <code>sendMsg</code> 实现方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">redisTemplate.opsForValue().set(phone,code,<span class="number">5</span>, TimeUnit.MINUTES);</span><br></pre></td></tr></table></figure>
+
+
+<p><code>UserServiceImpl</code> 的 <code>login</code> 实现方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">#从redis 中获取验证码</span><br><span class="line"> <span class="type">Object</span> <span class="variable">codeInSession</span> <span class="operator">=</span> redisTemplate.opsForValue().get(phone);</span><br></pre></td></tr></table></figure>
+<p>如果登录成功，删除redis缓存的验证码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//        删除验证码</span></span><br><span class="line">        redisTemplate.delete(phone);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>UserServiceImpl 完整代码<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;UserMapper, User&gt; <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证码发送</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> session</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMsg</span><span class="params">(User user, HttpSession session)</span> &#123;</span><br><span class="line">        <span class="comment">//获取手机号</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> user.getPhone();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成 4位数 验证码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> ValidateCodeUtils.generateValidateCode(<span class="number">4</span>).toString();</span><br><span class="line">        <span class="comment">//调用阿里云，发送手机验证码</span></span><br><span class="line"><span class="comment">//            SMSUtils.sendMessage(&quot;阿里云短信测试&quot;, &quot;SMS_154950909&quot;,phone,code);</span></span><br><span class="line">        <span class="comment">//生成的验证码 保存到 session</span></span><br><span class="line"><span class="comment">//        session.setAttribute(phone, code);</span></span><br><span class="line">        redisTemplate.opsForValue().set(phone,code,<span class="number">5</span>, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;code:&#123;&#125;&quot;</span>, code);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> map</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> session</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">login</span><span class="params">(Map map, HttpSession session)</span> &#123;</span><br><span class="line">        <span class="comment">//获取手机号</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> map.get(<span class="string">&quot;phone&quot;</span>).toString();</span><br><span class="line">        <span class="comment">//获取验证码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> map.get(<span class="string">&quot;code&quot;</span>).toString();</span><br><span class="line">        <span class="comment">//获取session中的验证码,根据 key 获取 value</span></span><br><span class="line"><span class="comment">//        Object codeInSession = session.getAttribute(phone);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//从redis 中获取 验证码</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">codeInSession</span> <span class="operator">=</span> redisTemplate.opsForValue().get(phone);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//对比验证码</span></span><br><span class="line">        <span class="keyword">if</span> (!(codeInSession != <span class="literal">null</span> &amp;&amp; codeInSession.equals(code))) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">CustomException</span>(<span class="string">&quot;验证码错误&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果正确，登录</span></span><br><span class="line"><span class="comment">//        删除验证码</span></span><br><span class="line">        redisTemplate.delete(phone);</span><br><span class="line">        <span class="comment">//判断是否为新用户，如果不是，自动注册为新用户</span></span><br><span class="line">        LambdaQueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        queryWrapper.eq(User::getPhone, phone);</span><br><span class="line">        <span class="comment">//查询数据库，如果查出不等于空，直接返回对象</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.getOne(queryWrapper);</span><br><span class="line">        <span class="comment">//如果等于空，注册</span></span><br><span class="line">        <span class="keyword">if</span> (user == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//是新用户</span></span><br><span class="line">            user = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">            user.setPhone(phone);</span><br><span class="line">            user.setStatus(<span class="number">1</span>);</span><br><span class="line">            userService.save(user);</span><br><span class="line">        &#125;</span><br><span class="line">        session.setAttribute(<span class="string">&quot;user&quot;</span>, user.getId());</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h2><ol>
+<li><p>运行idea，打开网页进入到界面,输入手机号获取验证码<br><img src="https://pic.imgdb.cn/item/648019881ddac507cc8a14df.jpg"><br><img src="https://pic.imgdb.cn/item/6480197f1ddac507cc8a0c7c.jpg"></p>
+</li>
+<li><p>登陆进去以后查看redis 是否已经删除<br><img src="https://pic.imgdb.cn/item/648019e91ddac507cc8a7c7e.jpg"></p>
+</li>
+</ol>
+<ul>
+<li>那么这就ok了</li>
+</ul>
+<h1 id="缓存菜品数据"><a href="#缓存菜品数据" class="headerlink" title="缓存菜品数据"></a>缓存菜品数据</h1><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><blockquote>
+<p>前面我们已经实现了移动端菜品查看功能，对应的服务端方法为DishController的list方法，此方法会根据前端提交的查询条件进行数据库查询操作。在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长。现在需要对此方法进行缓存优化，提高系统的性能。</p>
+</blockquote>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li>思路分析<ol>
+<li>改造DishController的list方法，先从Redis中获取菜品数据，如果有则直接返回，无需查询数据库;如果没有则查询数据库，并将查询到的菜品数据放入Redis。</li>
+<li>改造DishController的save和update方法，加入清理缓存的逻辑<blockquote>
+<p>注意事项:使用缓存过程中，要注意保证数据库中的数据和缓存中的数据一致，如果数据库中的数据发生变化，需要及时清理缓存数据。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>先在DishController中注入RedisTemplate</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在dishservice中实现方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据条件查询</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dish</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;DishDto&gt; <span class="title function_">getByList</span><span class="params">(Dish dish)</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+       List&lt;DishDto&gt; dishDtoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">+       <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dish.getCategoryId() + <span class="string">&quot;_&quot;</span>  + dish.getStatus();</span><br><span class="line">+        dishDtoList = (List&lt;DishDto&gt;) redisTemplate.opsForValue().get(key);</span><br><span class="line">+        <span class="keyword">if</span> (dishDtoList != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> dishDtoList;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//条件查询器</span></span><br><span class="line">        LambdaQueryWrapper&lt;Dish&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//过滤id</span></span><br><span class="line">        queryWrapper.eq(dish.getCategoryId() != <span class="literal">null</span>, Dish::getCategoryId, dish.getCategoryId());</span><br><span class="line">        <span class="comment">//过滤状态</span></span><br><span class="line">        queryWrapper.eq(Dish::getStatus, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//排序条件</span></span><br><span class="line">        queryWrapper.orderByDesc(Dish::getSort).orderByAsc(Dish::getUpdateTime);</span><br><span class="line">        <span class="comment">//获取查询到的结果作为返回值</span></span><br><span class="line">        List&lt;Dish&gt; list = dishService.list(queryWrapper);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">         dishDtoList = list.stream().map(item -&gt; &#123;</span><br><span class="line">            <span class="type">DishDto</span> <span class="variable">dishDto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DishDto</span>();</span><br><span class="line">            <span class="comment">//对象拷贝</span></span><br><span class="line">            BeanUtils.copyProperties(item, dishDto);</span><br><span class="line">            <span class="comment">//获取分类id</span></span><br><span class="line">            <span class="type">Long</span> <span class="variable">categoryId</span> <span class="operator">=</span> item.getCategoryId();</span><br><span class="line">            <span class="comment">//根据id获取分类对象</span></span><br><span class="line">            <span class="type">Category</span> <span class="variable">category</span> <span class="operator">=</span> categoryService.getById(categoryId);</span><br><span class="line">            <span class="keyword">if</span> (category != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">categoryName</span> <span class="operator">=</span> category.getName();</span><br><span class="line">                dishDto.setCategoryName(categoryName);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//获取当前菜品的id</span></span><br><span class="line">            <span class="type">Long</span> <span class="variable">id</span> <span class="operator">=</span> item.getId();</span><br><span class="line">            LambdaQueryWrapper&lt;DishFlavor&gt; dishFlavorLambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">            dishFlavorLambdaQueryWrapper.eq(DishFlavor::getDishId, id);</span><br><span class="line">            <span class="comment">//根据菜品id，查询到菜品口味</span></span><br><span class="line">            List&lt;DishFlavor&gt; dishFlavorList = dishFlavorService.list(dishFlavorLambdaQueryWrapper);</span><br><span class="line">            <span class="comment">//赋给dishDto的对应属性</span></span><br><span class="line">            dishDto.setFlavors(dishFlavorList);</span><br><span class="line">            <span class="keyword">return</span> dishDto;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">         <span class="comment">//如果不存在,那么需要查询数据库,并将查询到的菜品放入缓存,有效期六十分钟</span></span><br><span class="line">+        redisTemplate.opsForValue().set(key,dishDtoList,<span class="number">60</span>, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dishDtoList;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改DishServiceImpl中的<code>update</code>和<code>save</code>和批量修改方法(<code>status</code>)，加入清理缓存的逻辑</p>
+<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">update</button></li><li class="tab"><button type="button" data-href="#tab1-2">save</button></li><li class="tab"><button type="button" data-href="#tab1-3">status</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id修改菜品</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateWithFlavor</span><span class="params">(DishDto dto)</span> &#123;</span><br><span class="line">        <span class="comment">//修改 dish 表中数据</span></span><br><span class="line">        <span class="built_in">this</span>.updateById(dto);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先删除 dishFlavor 中的口味数据 ，执行 delete操作</span></span><br><span class="line">        LambdaQueryWrapper&lt;DishFlavor&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//通过对比得到和修改菜品id 相对应的 口味数据</span></span><br><span class="line">        queryWrapper.eq(DishFlavor::getDishId, dto.getId());</span><br><span class="line">        <span class="comment">//执行删除操作</span></span><br><span class="line">        dishFlavorService.remove(queryWrapper);</span><br><span class="line">        <span class="comment">//再将新的口味数据添加进 dish-flavor ，执行 insert 操作</span></span><br><span class="line">        List&lt;DishFlavor&gt; flavors = dto.getFlavors();</span><br><span class="line">        <span class="comment">//将前端传回的口味数据封装到 集合中</span></span><br><span class="line">        List&lt;DishFlavor&gt; list = flavors.stream().map(item -&gt; &#123;</span><br><span class="line">            <span class="comment">//将前端传回的菜品id封装到 flavors 中</span></span><br><span class="line">            item.setDishId(dto.getId());</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">        <span class="comment">//执行添加操作</span></span><br><span class="line">        dishFlavorService.saveBatch(list);</span><br><span class="line">        <span class="comment">//精确清除某个分类下的缓存</span></span><br><span class="line">+        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dto.getCategoryId() + <span class="string">&quot;_&quot;</span> + dto.getStatus();</span><br><span class="line">+        redisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增菜品同时，保存对应口味</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dto)</span> &#123;</span><br><span class="line">        <span class="comment">//保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dto);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从 dish 中获取id</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dto.getId();  <span class="comment">//保存菜品id</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//菜品口味</span></span><br><span class="line">        List&lt;DishFlavor&gt; flavors = dto.getFlavors();</span><br><span class="line">        flavors.stream().map((item) -&gt; &#123;</span><br><span class="line">            item.setDishId(dishId);</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//保存菜品口味数据到菜品口味表 dish——flavor</span></span><br><span class="line">        dishFlavorService.saveBatch(flavors);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//清空缓存数据</span></span><br><span class="line">+        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dto.getCategoryId() + <span class="string">&quot;_&quot;</span> + dto.getStatus();</span><br><span class="line">+        redisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 批量停售，启售</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> status</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ids</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateStatus</span><span class="params">(Integer status, List&lt;Long&gt; ids)</span> &#123;</span><br><span class="line">        LambdaUpdateWrapper&lt;Dish&gt; updateWrapper = <span class="keyword">new</span> <span class="title class_">LambdaUpdateWrapper</span>&lt;&gt;();</span><br><span class="line">        updateWrapper.in(ids != <span class="literal">null</span>, Dish::getId, ids);</span><br><span class="line">        updateWrapper.set(Dish::getStatus, status);</span><br><span class="line">+        LambdaQueryWrapper&lt;Dish&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">+        lambdaQueryWrapper.in(Dish::getId, ids);</span><br><span class="line">+        List&lt;Dish&gt; dishes = dishService.list(lambdaQueryWrapper);</span><br><span class="line">+            <span class="keyword">for</span> (Dish dish : dishes) &#123;</span><br><span class="line">+                 <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dish.getCategoryId() + <span class="string">&quot;_1&quot;</span>;</span><br><span class="line">+                   redisTemplate.delete(key);</span><br><span class="line">+              &#125;</span><br><span class="line">        dishService.update(updateWrapper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div></li>
+</ol>
+<h2 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h2><ul>
+<li>在实现过程中，使用老师给的<code>redis</code>配置类出现了bug，菜品的实现类中的创造时间和修改时间使用的 <code>LocalDateTime</code> 类型，redis存的进去，但取不出来。正常运行，但是前后端联调时，移动端的菜品信息都无法访问，在找了资料后才发现是redis貌似不支持 <code>LocalDateTime</code> 的类型。所以我更改了redis<code>配置类</code></li>
+</ul>
+<h3 id="更改RedisConfig"><a href="#更改RedisConfig" class="headerlink" title="更改RedisConfig"></a>更改<code>RedisConfig</code></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis配置类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"><span class="comment">//     extends CachingConfigurerSupport</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    @Bean</span></span><br><span class="line"><span class="comment">//    public RedisTemplate&lt;Object, Object&gt; redisTemplate(RedisConnectionFactory connectionFactory) &#123;</span></span><br><span class="line"><span class="comment">//        RedisTemplate&lt;Object, Object&gt; redisTemplate = new RedisTemplate&lt;&gt;();</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        //默认的Key序列化器为：JdkSerializationRedisSerializer</span></span><br><span class="line"><span class="comment">//        redisTemplate.setKeySerializer(new StringRedisSerializer()); // key序列化</span></span><br><span class="line"><span class="comment">//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); // value序列化</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        redisTemplate.setConnectionFactory(connectionFactory);</span></span><br><span class="line"><span class="comment">//        return redisTemplate;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean()</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory factory)</span> &#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        Jackson2JsonRedisSerializer&lt;Object&gt; j2jrs = <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>&lt;&gt;(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">om</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        <span class="comment">// 解决jackson2无法反序列化LocalDateTime的问题</span></span><br><span class="line">        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</span><br><span class="line">        om.registerModule(<span class="keyword">new</span> <span class="title class_">JavaTimeModule</span>());</span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);</span><br><span class="line">        j2jrs.setObjectMapper(om);</span><br><span class="line">        <span class="comment">// 序列化 value 时使用此序列化方法</span></span><br><span class="line">        template.setValueSerializer(j2jrs);</span><br><span class="line">        template.setHashValueSerializer(j2jrs);</span><br><span class="line">        <span class="comment">// 序列化 key 时</span></span><br><span class="line">        <span class="type">StringRedisSerializer</span> <span class="variable">srs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>();</span><br><span class="line">        template.setKeySerializer(srs);</span><br><span class="line">        template.setHashKeySerializer(srs);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更改Dihs-实现类"><a href="#更改Dihs-实现类" class="headerlink" title="更改Dihs 实现类"></a>更改Dihs 实现类</h3><ul>
+<li>同时在dish实现类的 创建时间和修改时间上加上注解<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建时间</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改时间</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime updateTime;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p><img src="https://pic.imgdb.cn/item/648135a31ddac507cc0b33cc.jpg"></p>
+<ul>
+<li>由于我们现在还没有编写套餐数据的缓存，所以我们现在可以用菜品数据和套餐数据做对比</li>
+<li>先手动点击一遍所有的分类，让Redis缓存（包括菜品分类和套餐分类）</li>
+<li>之后去控制台清空输出，方便我们后续对比<br>随后再次点击菜品分类，控制台日志不会输出SQL语句的日志</li>
+<li>但是点击套餐分类时，控制台会输出SQL语句的日志</li>
+<li>当我们对菜品数据进行任意形式的修改(修改&#x2F;添加&#x2F;删除&#x2F;改状态)时，缓存数据将被清理，同时重新查询，避免出现脏数据</li>
+</ul>
+<h1 id="缓存套餐数据"><a href="#缓存套餐数据" class="headerlink" title="缓存套餐数据"></a>缓存套餐数据</h1><h2 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h2><blockquote>
+<p>前面我们已经实现了移动端套餐查看功能，对应的服务端方法为SetmealController的list方法，此方法会根据前端提交的查询条件进行数据库查询操作。在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长现在需要对此方法进行缓存优化，提高系统的性能。具体的实现思路如下:</p>
+</blockquote>
+<ol>
+<li>导入<code>Spring Cache</code>和<code>Redis</code>相关<code>maven</code>坐标</li>
+<li>在<code>application.yml</code>中配置缓存数据的过期时间</li>
+<li>在启动类上加入<code>@EnableCaching</code>注解，开启缓存注解功能,在<code>SetmealController</code>的list方法上加入<code>@Cacheable</code>注解</li>
+<li>在<code>SetmealController</code>的save和delete方法上加入<code>CacheEvict</code>注解</li>
+</ol>
+<h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
+<li>使用更方便的注解方式进行操作</li>
+</ul>
+<ol>
+<li>导入redis和cache的pom坐标，redis前期已经导入过了，所以只用导入cache的即可<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在yml文件中增加缓存有效期配置<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">time-to-live:</span> <span class="number">1800000</span> <span class="comment">#缓存有效期,30分钟</span></span><br></pre></td></tr></table></figure></li>
+<li>启动类开启缓存注解<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span>       <span class="comment">//扫描注解，创建过滤器</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span>       <span class="comment">//事务支持</span></span><br><span class="line">+ <span class="meta">@EnableCaching</span>      <span class="comment">//开启缓存</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class,args);</span><br><span class="line">        log.info(<span class="string">&quot;启动成功&quot;</span>);</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>SermealService的getByList方法添加<code>Cacheable</code>注解<br>该注解的功能是：在方法执行前，<code>Spring</code>先查看缓存中是否有数据；如果有数据，则直接返回缓存数据；若没有数据，调用方法并将方法返回值放到缓存中<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据条件查询套餐</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> setmeal</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Cacheable</span> (value = <span class="string">&quot;setmealCache&quot;</span> ,key = <span class="string">&quot;#setmeal.id + &#x27;_&#x27; + setmeal.status&quot;</span> )</span><br><span class="line">    <span class="keyword">public</span> List&lt;Setmeal&gt; <span class="title function_">getByList</span><span class="params">(Setmeal setmeal)</span> &#123;</span><br><span class="line">        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//过滤，</span></span><br><span class="line">        queryWrapper.in(setmeal.getCategoryId() != <span class="literal">null</span>, Setmeal::getCategoryId, setmeal.getCategoryId() );</span><br><span class="line">        queryWrapper.eq(setmeal.getStatus() != <span class="literal">null</span>, Setmeal::getStatus, <span class="number">1</span>);</span><br><span class="line">        queryWrapper.orderByDesc(Setmeal::getUpdateTime);</span><br><span class="line">        List&lt;Setmeal&gt; list = setmealService.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>测试的时候报错了，页面上的套餐数据报错了，错误码为<code>500</code>，原来是因为没有给 返回的 R类实现序列化接口</p>
+</blockquote>
+<ul>
+<li><p>添加即可</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">R</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次测试，成功，只有第一次访问的时候会执行查询sql，其余都是从缓存中读取的数据</p>
+</li>
+</ul>
+<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">deleteIdsWithSetmeal</button></li><li class="tab"><button type="button" data-href="#tab1-2">save</button></li><li class="tab"><button type="button" data-href="#tab1-3">update</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><p>执行删除时</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><p>执行新增时</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><p>执行批量停售启售时</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<ul>
+<li>修改完毕之后，重启服务器测试看看有没有效果，如果有效果的话，我们push一下代码，继续做别的优化</li>
+</ul>
+<h1 id="mysql主从复制"><a href="#mysql主从复制" class="headerlink" title="mysql主从复制"></a>mysql主从复制</h1><p>什么是mysql主从复制？</p>
+<blockquote>
+<p>MySOL主从复制是一个异步的复制过程，底层是基于Mysql数据库自带的二进制日志功能。就是一台或多台MySOL数据库(slave，即从库)从另一台MySOL数据库(master，即主库)进行日志的复制然后再解析日志并应用到自身，最终实现从库的数据和主库的数据保持一致。MySOL主从复制是MySOL数据库<code>自带功能</code>，无需借助第三方工具。</p>
+</blockquote>
+<ul>
+<li>MySQL复制过程分成三步</li>
+</ul>
+<ol>
+<li>master将改变记录到二进制日志 (binary log)</li>
+<li>slave将master的binary log拷贝到它的中继日志 (relay log)</li>
+<li>slave重做中继日志中的事件，将改变应用到自己的数据库中</li>
+</ol>
+<p><img src="https://pic.imgdb.cn/item/6482b0e61ddac507cc5fe828.jpg"></p>
+<h2 id="配置主从复制"><a href="#配置主从复制" class="headerlink" title="配置主从复制"></a>配置主从复制</h2><ul>
+<li>前置条件<br>提前准备好两台服务器，分别安装mysqk并启动服务成功<ul>
+<li>主库 Master</li>
+<li>从库 Slave</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>一台使用虚拟机，一台用本机即可，我使用的是windows  cmd界面输入： <code>mysql -u root -p</code>  回车即可</p>
+</blockquote>
+<ul>
+<li>完成，当然现在他们还有没有任何关系<br><img src="https://pic.imgdb.cn/item/6482b38c1ddac507cc630ac2.jpg"></li>
+</ul>
+<h3 id="配置主库-master"><a href="#配置主库-master" class="headerlink" title="配置主库 master"></a>配置主库 master</h3><ol>
+<li><p>修改Mysql数据库的配置文件，我这里使用虚拟机的数据库作为主库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  #[必须]启动二进制日志</span><br><span class="line">server-id=100   # [必须]服务器唯一ID</span><br></pre></td></tr></table></figure></li>
+<li><p><code>重启</code>mysql服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三步: 登录<code>Mysql</code>数据库，执行下面SQL</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> REPLICATION SLAVE <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;xiaoming&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> Root<span class="variable">@123456</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面SOL的作用是创建一个用户xiaoming,密码为Root@123456，并且给xiaoming用户授予REPLICATION SLAVE权限。常用于建立复制时所需要用到的用户权限，也就是slave必须被master授权具有该权限的用户，才能通过该用户复制。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>mysql版本<code>8</code> 或 <code>8以上</code>依次使用以下两条命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE USER 用户名 IDENTIFIED WITH &#x27;mysql_native_password&#x27; BY &#x27;密码&#x27;;</span><br><span class="line"> GRANT REPLICATION SLAVE ON *.* TO 用户名;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>记录值</li>
+</ol>
+<ul>
+<li>登录mysql数据库，执行下面sql，记录下结果中 <code>file</code> 和 <code>position</code> 的值,<br>很重要！输入完这条命令后，不要再有任何操作！，一会从库就靠这两个值定位<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+mysql-bin.000001 |     1200</li>
+</ul>
+<h3 id="配置从库Slave"><a href="#配置从库Slave" class="headerlink" title="配置从库Slave"></a>配置从库Slave</h3><ol>
+<li>直接虚拟机克隆一下然后改下<code>ip</code>和mysql配置文件就可以了</li>
+</ol>
+<ul>
+<li>右键单击虚拟机 -&gt; 管理 -&gt; 克隆</li>
+</ul>
+<ol start="2">
+<li><p>修改mysql的uuid，找到以后进去随便改一个就行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -iname &quot;auto.cnf&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在第二个服务器的mysql配置文件的 [mysqld]下 新增</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server-id=100 [保证id是唯一不重复即可，自定义]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>登录mysql数据库,<code>mysql8以下</code>的执行下面的sql</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">change master to master_host=&#x27;192.168.10.102&#x27;,master_user=&quot;xiaoming&quot;,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000002&#x27;,master_log_pos=157;</span><br></pre></td></tr></table></figure>
+<p><code>mysql8</code>版本执行以下sql</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">change master to master_host=&#x27;192.168.10.102&#x27;,master_user=&quot;xiaoming&quot;,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000003&#x27;,master_log_pos=157,get_master_public_key=1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行后使用 <code>show slave status</code> 或 <code>show slave status\G</code> 查看</p>
+</li>
+</ol>
+<ul>
+<li><pre><code>      Slave_IO_Running: Yes
+      Slave_SQL_Running: Yes
+</code></pre>
+</li>
+</ul>
+<p>确认这两个状态都为yes<br><img src="https://pic.imgdb.cn/item/6482de8e1ddac507ccaf4917.jpg"></p>
+<ol start="5">
+<li>使用navicat 验证， 连接上以后在主表创建数据库和表，刷新后子表也同样有了同样的库和表</li>
+</ol>
+<ul>
+<li>配置完成</li>
+</ul>
+<h2 id="读写分离案例"><a href="#读写分离案例" class="headerlink" title="读写分离案例"></a>读写分离案例</h2><blockquote>
+<p>背景：<br>面对日益增加的系统访问量，数据库的吞吐量面临着巨大瓶颈。对于同一时刻有大量并发读操作和较少写操作类型的应用系统来说，将数据库拆分为主库和从库，主库负责处理事务性的增删改操作，从库负责处理查询操作，能够有效的避免由数据更新导致的行锁，使得整个系统的查询性能得到极大的改善<br><img src="https://pic.imgdb.cn/item/6482ea161ddac507ccc3c134.jpg"></p>
+</blockquote>
+<ul>
+<li>使用Sharding-JDBC实现读写分离步骤</li>
+</ul>
+<ol>
+<li><p>导入maven坐标</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sharding-jdbc-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0-RC1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在配置文件中配置读写分离规则</p>
+</li>
+<li><p>在配置文件中配置允许bean定义覆盖配置项</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>在配置文件中配置允许bean定义覆盖配置项</p>
+</li>
+</ol>
+<ul>
+<li>在 yml 文件中加入main配置项<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="string">+</span>  <span class="attr">main:</span></span><br><span class="line"><span class="string">+</span>    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行程序，使用postman联调，注意看控制台输出的日志，运行的是主库还是从库</p>
+<h2 id="读写分离应用到项目"><a href="#读写分离应用到项目" class="headerlink" title="读写分离应用到项目"></a>读写分离应用到项目</h2><h3 id="数据库环境准备-主从复制"><a href="#数据库环境准备-主从复制" class="headerlink" title="数据库环境准备(主从复制)"></a>数据库环境准备(主从复制)</h3><ul>
+<li>直接使用前面在虚拟机搭建的主从复制的数据库环境即可</li>
+<li>在数据库创建瑞吉外卖项目的业务数据库并导入相关表结构和数据</li>
+<li>只用在主库操作即可，从库会自动复制主库数据</li>
+</ul>
+<ol>
+<li>主表创建<code>reggie</code>数据库<br><img src="https://pic.imgdb.cn/item/6482ff741ddac507cce58ccc.jpg"></li>
+<li>运行之前数据库导出的<code>sql</code>文件,导出时选择结构和数据<br><img src="https://pic.imgdb.cn/item/6482ffe11ddac507cce67da8.jpg"></li>
+</ol>
+<h3 id="代码改造"><a href="#代码改造" class="headerlink" title="代码改造"></a>代码改造</h3><ul>
+<li>在项目中加入 <code>Sharding-JDBC</code> 实现读写分离步骤：<br>首先新建一个分支，在新的分支上实现代码的优化，最后测试没有问题再合并到主分支上</li>
+</ul>
+<ol>
+<li><p>导入maven坐标</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--sharding-jdbc--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sharding-jdbc-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0-RC1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在配置文件配置读写分离规则,替换掉<code>datasourse</code>,记得要修改数据库名字</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>在配置文件配置<code>允许bean定义覆盖</code>配置项</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="string">+</span>  <span class="attr">main:</span></span><br><span class="line"><span class="string">+</span>    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="功能测试-1"><a href="#功能测试-1" class="headerlink" title="功能测试"></a>功能测试</h3><ul>
+<li>如果启动不报错，基本上就问题不大了</li>
+<li>服务正常启动，测试读写分离</li>
+</ul>
+<blockquote>
+<p>启动测试，前后端联调,没有问题ok！</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>编程学习</category>
+      </categories>
+      <tags>
+        <tag>实战项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Swagger</title>
+    <url>//2023/06/10/Swagger/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，再通过Swagger衍生出来的一系列项目和工具就可以做到生成各种格式的接口文档，以及在线接口调试页面等等。</p>
+<blockquote>
+<p>官网：<a href="https://swagger.io/">https://swagger.io/</a></p>
+</blockquote>
+<p>knife4j是为Java MVC框架<code>集成Swagger</code>生成Api文档的增强解决方案</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
+<li>操作步骤<ol>
+<li><p>导入knife4j的maven坐标</p>
+  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>导入knife4j相关配置类,加上 <code>@EnableSwagger2</code>、 <code>@EnableKnife4j</code>注解</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">      <span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Docket <span class="title function_">createRestApi</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 文档类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .select()</span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.yin.reggie.controller&quot;</span>))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">            .title(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">            .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">            .description(<span class="string">&quot;hello接口文档&quot;</span>)</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置静态资源，否则接口文档界面无法访问</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置静态资源映射</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> &#123;</span><br><span class="line">    log.info(<span class="string">&quot;开始进行静态资源映射...&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;doc.html&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;/webjars/**&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在LoginCheckFilter中设置不需要处理的请求路径</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h1><table>
+<thead>
+<tr>
+<th align="left">注解</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">@Api</td>
+<td align="center">用在请求的类上，例如controller，表示对类的说明</td>
+</tr>
+<tr>
+<td align="left">@Apimodel</td>
+<td align="center">用在类上，通常是实体类，表示一个返回响应数据的信息</td>
+</tr>
+<tr>
+<td align="left">@ApimodelProperty</td>
+<td align="center">用在属性上，描述响应类的属性</td>
+</tr>
+<tr>
+<td align="left">@ApiOperation</td>
+<td align="center">用在请求的方法上，说明方法的用途，作用</td>
+</tr>
+<tr>
+<td align="left">@ApilmplicitParams</td>
+<td align="center">用在请求的方法上，表示一组参数说明</td>
+</tr>
+<tr>
+<td align="left">@ApilmplicitParam</td>
+<td align="center">用在@ApilmplicitParams注解中，指定一个请求参数的各个方面</td>
+</tr>
+</tbody></table>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>YApi</title>
+    <url>//2023/06/10/YApi/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>&amp;emsp;&amp;emsp;YApi 是高效、易用、功能强大的 api管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务。可以帮助开发者轻松创建、发布、维护 APL，YApi 还为用户提供了优秀的交互体验，开发人员只需利用平台提供的接口数据写入工具以及简单的点击操作就可以实现接口的管理。YApi让接口开发更简单高效，让接口的管理更具可读性、可维护性，让团队协作更合理<br><br></p>
+<blockquote>
+<p>源码地址: <a href="https://github.com/YMFE/yapi">https://github.com/YMFE/yapi</a></p>
+</blockquote>
+<br>
+要使用API，需要自己进行部署
+<br>
+<br>
+
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a><strong>使用方式</strong></h1><p>使用Yapi，可以执行下面的操作</p>
+<ul>
+<li>添加项目</li>
+<li>添加分类</li>
+<li>添加接口</li>
+<li>编辑接口</li>
+<li>查看接口</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>什么是前后端分离开发</title>
+    <url>//2023/06/10/%E4%BB%80%E4%B9%88%E6%98%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong><center>介绍</center></strong></h3><br>
+ 
+<p><strong>前后端分离开发</strong>，就是在项目开发过程中，对于前端代码的开发由专门的<strong>前端开发人员</strong>负责，后端代码则由<strong>后端开发人员</strong>负责，这样可以做到分工明确、各司其职，提高开发效率，前后端代码并行开发，可以加快项目开发进度。目前，前后端分离开发方式已经被越来越多的公司所采用，成为当前项目开发的主流开发方式。</p>
+<p>前后端分离开发后，从工程机构上也会发生变化，即前后端代码不再混合在同一个maven工程中，而是分为<strong>前端工程</strong>和<strong>后端工程</strong>。<br><img src="https://pic.imgdb.cn/item/6483d4491ddac507cc1343b5.jpg"></p>
+<br>
+<br>
+<br>
+
+<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a><strong><center>开发流程</center></strong></h3><p>&amp;emsp;&amp;emsp;前后端分离开发后，面临一个问题，就是前端开发人员和后端开发人员如何进行配合来共同开发一个项目？可以按照如下流程进行:<br><img src="https://pic.imgdb.cn/item/6483d5071ddac507cc13fc80.jpg"></p>
+<ul>
+<li><strong>接口(API接口)</strong> 就是一个http的请求地址，主要就是去定义:请求路径、请求方式、请求参数、响应数据等内容。</li>
+</ul>
+<p><strong><center>前端技术栈</center></strong><br><strong>开发工具</strong></p>
+<ul>
+<li>Visual Studio Code</li>
+<li>hbuilder</li>
+</ul>
+<p><strong>技术框架</strong></p>
+<ul>
+<li>nodejs</li>
+<li>VUE</li>
+<li>ElementUI</li>
+<li>mock</li>
+<li>webpack</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>瑞吉外卖</title>
     <url>//2023/05/30/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p> 在此特别感谢黑马程序员提供的教程:</p>
@@ -489,7 +1093,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>247.1万</span></span>
+                        <span>247.2万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>7.5万</span></span></p>
@@ -2020,106 +2624,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Android_Studio安装</title>
-    <url>//2023/06/04/2023-06-04-Android-Studio%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<blockquote>
-<p>学校的移动应用开发课程，不得已下一个，记录一下<br>还是得吐槽一下老师，绝了，混子</p>
-</blockquote>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><ol>
-<li>官网下载<blockquote>
-<p>官网：<a href="https://developer.android.google.cn/studio">https://developer.android.google.cn/studio</a></p>
-</blockquote>
-</li>
-<li>随便在哪下，跑起来就行不是吗</li>
-</ol>
-<p>我下的版本是2022.1</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li><p>打开安装包点击next<br><img src="https://pic.imgdb.cn/item/647c707c1ddac507cc08a7c1.jpg"></p>
-</li>
-<li><p>继续next，打勾那个是安卓虚拟设备，记得<code>勾上</code><br><img src="https://pic.imgdb.cn/item/647c717d1ddac507cc098e9d.jpg"></p>
-</li>
-<li><p>更换安装位置，别做c盘战士就是了，继续next<br><img src="https://pic.imgdb.cn/item/647c71a21ddac507cc09b20f.jpg"></p>
-</li>
-<li><p>Install，左下角打勾的地方是不创建快捷方式，一般没必要<br><img src="https://pic.imgdb.cn/item/647c71f41ddac507cc0a004e.jpg"></p>
-</li>
-<li><p>ok<br><img src="https://pic.imgdb.cn/item/647c72501ddac507cc0a5176.jpg"></p>
-</li>
-</ol>
-<ul>
-<li><p>打开Android Studio</p>
-</li>
-<li><p>安装谷歌什么的，<code>不需要</code><br><img src="https://pic.imgdb.cn/item/647c7ba91ddac507cc1f1550.jpg"></p>
-</li>
-</ul>
-<h1 id="下载SDK"><a href="#下载SDK" class="headerlink" title="下载SDK"></a>下载SDK</h1><blockquote>
-<p>SDK全称为Software Development kit,就是<code>软件开发工具包</code>,可以将app源码编译为可执行的app应用</p>
-</blockquote>
-<ul>
-<li><p>提示需要安装<code>SDK</code><br><img src="https://pic.imgdb.cn/item/647c7b461ddac507cc1e78ef.jpg"></p>
-</li>
-<li><p>选 <code>custom</code><br><img src="https://pic.imgdb.cn/item/647c7c941ddac507cc207720.jpg"></p>
-</li>
-<li><p>选界面，进去也可以调，随意选<br><img src="https://pic.imgdb.cn/item/647c7cbd1ddac507cc20c20c.jpg"></p>
-</li>
-<li><p>安装SDK，除了<code>安装位置</code>，其他默认即可 （看着我的眼睛，不要做c盘战士好吗）<br><img src="https://pic.imgdb.cn/item/647c7d7c1ddac507cc225071.jpg"></p>
-</li>
-<li><p>这里是虚拟机的内存，学习两个G也够用了<br><img src="https://pic.imgdb.cn/item/647c7e031ddac507cc23430a.jpg"></p>
-</li>
-<li><p>提示要安装这个，next即可<br><img src="https://pic.imgdb.cn/item/647c7e6f1ddac507cc23db61.jpg"></p>
-</li>
-<li><p>要下载SDK，next即可<br><img src="https://pic.imgdb.cn/item/647c7eb01ddac507cc243b9a.jpg"></p>
-</li>
-<li><p>一定一定要选Accept，最后一个好像是Intel硬件加速什么的，我也点了，前两个<code>必选Accept</code>,选完Finish<br><img src="https://pic.imgdb.cn/item/647c7f001ddac507cc24b2b7.jpg"></p>
-</li>
-<li><p>稍等一会，安装中<br><img src="https://pic.imgdb.cn/item/647c7f671ddac507cc2558a8.jpg"></p>
-</li>
-<li><p>下载完点击finish，进入到新建工程界面<br><img src="https://pic.imgdb.cn/item/647c80cb1ddac507cc274f48.jpg"></p>
-</li>
-</ul>
-<blockquote>
-<p>这就差不多ok了</p>
-</blockquote>
-<h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><ul>
-<li><p>这里新建一个项目<br><img src="https://pic.imgdb.cn/item/647c811b1ddac507cc27b40d.jpg"></p>
-</li>
-<li><p>选这个<br><img src="https://pic.imgdb.cn/item/647c813c1ddac507cc27dee8.jpg"></p>
-</li>
-<li><p>默认位置改一下，默认语言改为<code>java</code>，然后<code>finish</code><br><img src="https://pic.imgdb.cn/item/647c81b21ddac507cc2876ac.jpg"></p>
-</li>
-<li><p>然后就会默认创建一个工程<br><img src="https://pic.imgdb.cn/item/647c821b1ddac507cc28fe02.jpg"></p>
-</li>
-</ul>
-<h1 id="安装安卓模拟器，"><a href="#安装安卓模拟器，" class="headerlink" title="安装安卓模拟器，"></a>安装安卓模拟器，</h1><ul>
-<li><p>点击<code>Device Manager</code><br><img src="https://pic.imgdb.cn/item/647c82791ddac507cc296bbc.jpg"></p>
-</li>
-<li><p>点击，都是外观，我这里选择的是 Pixel 4，选择完 next<br><img src="https://pic.imgdb.cn/item/647c83021ddac507cc2a2ff8.jpg"></p>
-</li>
-<li><p>版本我选择的13<br><img src="https://pic.imgdb.cn/item/647c84221ddac507cc2bdd83.jpg"></p>
-</li>
-<li><p>安装，点击下载键<br><img src="https://pic.imgdb.cn/item/647c84681ddac507cc2c6856.jpg"></p>
-</li>
-<li><p>无脑finish<br><img src="https://pic.imgdb.cn/item/647c852f1ddac507cc2dd8df.jpg"></p>
-</li>
-<li><p>点击启动键<br><img src="https://pic.imgdb.cn/item/647c857e1ddac507cc2e4f8e.jpg"></p>
-</li>
-<li><p>如果想要这种界面的模拟器，不需要就略过</p>
-<blockquote>
-<p>左上角点击<code>File</code> -&gt; 点击 <code>Settings</code>或者<code>Ctrl + Alt + s</code> -&gt; 搜索栏搜索 <code>Emulator</code> -&gt; 将 <code>Launuch in a tool window</code> 的复选框<code>对勾去掉</code> -&gt; 设置框右下角 <code>apply</code> -&gt; <code>ok</code> -&gt; 重新启动 Android Studio 即可<br><img src="https://pic.imgdb.cn/item/647c883c1ddac507cc339837.jpg"></p>
-</blockquote>
-</li>
-<li><p>重启完成后运行模拟器，然后点击<br><img src="https://pic.imgdb.cn/item/647c899c1ddac507cc35330e.jpg"></p>
-</li>
-<li><p>效果如图,ok了<br><img src="https://pic.imgdb.cn/item/647c89ba1ddac507cc3559d6.jpg"></p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>android</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>初学redis</title>
-    <url>//2023/06/04/2023-06-04-%E5%88%9D%E5%AD%A6redis/</url>
+    <url>//2023/06/04/%E5%88%9D%E5%AD%A6redis/</url>
     <content><![CDATA[<ul>
 <li>redis 之 数据类型<blockquote>
 <p>redis存储的是<code>key-value</code>结构的数据，其中key是字符串类型，value有5种常用的数据类型</p>
@@ -2372,511 +2878,5 @@
       <tags>
         <tag>redis</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>linux以及windows配置redis</title>
-    <url>//2023/06/04/2023-06-04-linux%E4%BB%A5%E5%8F%8Awindows%E9%85%8D%E7%BD%AEredis/</url>
-    <content><![CDATA[<h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><h2 id="linux下载"><a href="#linux下载" class="headerlink" title="linux下载"></a>linux下载</h2><blockquote>
-<p><a href="https://redis.io/docs/getting-started/">https://redis.io/docs/getting-started/</a></p>
-</blockquote>
-<h2 id="windows下载"><a href="#windows下载" class="headerlink" title="windows下载"></a>windows下载</h2><blockquote>
-<p><a href="https://github.com/MicrosoftArchive/redis/releases">https://github.com/MicrosoftArchive/redis/releases</a></p>
-</blockquote>
-<h2 id="linux编译"><a href="#linux编译" class="headerlink" title="linux编译"></a>linux编译</h2><ol>
-<li>先<code>押解</code>压缩包<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf redis-4.0.0.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure></li>
-<li>然后安装Redis的依赖环境<code>gcc</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure></li>
-<li>进入 &#x2F;usr&#x2F;local&#x2F;redis-4.0.0进行<code>编译</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure></li>
-<li>进入redis的<code>src</code>目录中，进行安装<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></li>
-</ol>
-<blockquote>
-<p>注意，以上四步只在第一次安装执行<br>5. 在src目录下，运行redis.server 默认端口号为 6379</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./redis.server</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>ok 启动完成</li>
-</ul>
-<h2 id="windows启动"><a href="#windows启动" class="headerlink" title="windows启动"></a>windows启动</h2><p>打开redis根目录</p>
-<ol>
-<li>双击 <code>redis-server.exe</code></li>
-<li>双击 <code>redis-cli.exe</code></li>
-</ol>
-<ul>
-<li>ok运行完成</li>
-</ul>
-<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><h2 id="开启登录密码校验"><a href="#开启登录密码校验" class="headerlink" title="开启登录密码校验"></a>开启登录密码校验</h2><blockquote>
-<p>redis安装后默认是不需要密码的，但是这样是不安全的，所有我们在<code>配置</code>文件中修改，打开密码校验</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /usr/local/你的redis目录/src/redis.conf</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>通过搜索找到密码配置<ul>
-<li>进入文件中后<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/pass  或  /requirepass</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>未打开时，这是一个<code>注释</code>，看清楚奥<br><img src="https://pic.imgdb.cn/item/647c3dd6f024cca17395f74e.jpg"></p>
-</blockquote>
-<ul>
-<li><p>找到后按 <code>i</code> 进去编辑模式，注释去掉，然后 <code>requirepass</code> 后面就是你修改的密码</p>
-</li>
-<li><p>修改后按<code>esc</code> + <code>:wq </code>保存并退出</p>
-</li>
-<li><p>然后再次打开redis服务就会需要密码了</p>
-</li>
-<li><p>验证一下<br><img src="https://pic.imgdb.cn/item/647c3f29f024cca17398aba8.jpg"></p>
-</li>
-</ul>
-<h2 id="打开远程连接"><a href="#打开远程连接" class="headerlink" title="打开远程连接"></a>打开远程连接</h2><blockquote>
-<p>刚安装的redis默认只能有当前服务器连接，不支持远程连接，我们需要修改配置<br>在windows中redis的根目录下试验一下<br><img src="https://pic.imgdb.cn/item/647c40e3f024cca1739e6351.jpg"></p>
-</blockquote>
-<p>果然</p>
-<ul>
-<li>还是修改conf文件<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>进入文件后 输入 <code>/bind</code> 搜索</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/bind</span><br></pre></td></tr></table></figure>
-<p>找到它，注释掉<br><img src="https://pic.imgdb.cn/item/647c4163f024cca173a13625.jpg"></p>
-<ul>
-<li>重启redis,先找到它，然后<code>干掉</code><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef |grep redis</span><br><span class="line">kill -9 你redis的进程号</span><br></pre></td></tr></table></figure>
-<img src="https://pic.imgdb.cn/item/647c42e0f024cca173a9aab4.jpg"></li>
-</ul>
-<p>最后<code>关闭防火墙</code>或者<code>设置好端口号</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=6379/tcp --permanent #开放6379端口</span><br><span class="line">firewall-cmd --reload   # 重启防火墙</span><br></pre></td></tr></table></figure>
-
-<p>windows校验<br><img src="https://pic.imgdb.cn/item/647c45c4f024cca173b17ab3.jpg"></p>
-]]></content>
-      <tags>
-        <tag>linux</tag>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>瑞吉外卖优化篇</title>
-    <url>//2023/06/07/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E4%BC%98%E5%8C%96%E7%AF%87/</url>
-    <content><![CDATA[<p>在此特别感谢黑马程序员提供的教程:</p>
-<div class="bvideo"><a href="//www.bilibili.com/video/BV13a411q753" target="_blank">
-        <div class="bvideo-box">
-            <div class="bvideo-cover">
-                <div class="cover-default"></div>
-                <div class="bvideo-cover-layer" style="background-image:url(https://pic1.xuehuaimg.com/proxy/http://i0.hdslb.com/bfs/archive/66e8947b3c48d6710c93d572ebc91f27bf4db9fc.png)">
-                    <i class="icon-video"></i>
-                </div>
-                <span class="duration">32:16:10</span>
-            </div>
-            <div class="bvideo-info">
-                <p class="title">黑马程序员Java项目实战《瑞吉外卖》，轻松掌握springboot + mybatis plus开发核心技术的真java实战项目</p>
-                <p class="card-status">
-                    <span class="play-num">
-                        <i class="fa fa-youtube-play"></i>
-                        <span>246.9万</span></span>
-                    <span>
-                        <i class="fa fa-list-alt"></i>
-                        <span>7.5万</span></span></p>
-                <div class="partition">
-                    <label class="card-label">视频</label>
-                    <label class="up-label"></label>
-                    <label class="up-name">黑马程序员</label>
-                </div>
-                <div class="actions hide"></div>
-            </div>
-        </div>
-    </a></div>
-
-<blockquote>
-<p>本文是瑞吉外卖项目的优化篇<br>直接开始</p>
-</blockquote>
-<h1 id="上传git"><a href="#上传git" class="headerlink" title="上传git"></a>上传git</h1><ol>
-<li><p>将之前做好的项目上传到github或gitee，然后新建一个<code>分支</code>，接下来所有的操作都在新建的分支上操作，最后<code>合并</code>分支即可</p>
-<blockquote>
-<p>上传就不放上来了，如果忘了可以回去看看</p>
-</blockquote>
-</li>
-<li><p>上传完后，在新建的<code>v1.0</code>分支上进行<code>redis</code>的环境配置</p>
-</li>
-</ol>
-<h1 id="项目redis环境配置"><a href="#项目redis环境配置" class="headerlink" title="项目redis环境配置"></a>项目redis环境配置</h1><h2 id="配置pom文件"><a href="#配置pom文件" class="headerlink" title="配置pom文件"></a>配置pom文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.8.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="新增redis配置类"><a href="#新增redis配置类" class="headerlink" title="新增redis配置类"></a>新增redis配置类</h2><ul>
-<li>因为springboot的自动配置会将key和value做些更改，所以将key的配置改一下<br><img src="https://pic.imgdb.cn/item/64800e901ddac507cc7a50b5.jpg"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis配置类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span>  <span class="title class_">RedisConfig</span> <span class="keyword">extends</span> <span class="title class_">CachingConfigurerSupport</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Object,Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory connectionFactory)</span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object,Object&gt; redisTemplate = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="yml配置文件添加配置项"><a href="#yml配置文件添加配置项" class="headerlink" title="yml配置文件添加配置项"></a>yml配置文件添加配置项</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">localhost</span>  <span class="comment">#redis服务器的ip,如果是本地可以直接用 localhost,方便后续观察调试</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">6379</span>        <span class="comment">#redis的端口号，默认为6379</span></span><br><span class="line">      <span class="attr">password:</span>         <span class="comment">#自己设置的redis密码，localhost 可以不填密码</span></span><br><span class="line">      <span class="attr">database:</span> <span class="number">0</span>       <span class="comment">#默认0号数据库</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><ul>
-<li>配置完成后，上传到v1.0分支，在网页上刷新切换分支验证一下<br><img src="https://pic.imgdb.cn/item/648010901ddac507cc7d3cb5.jpg"></li>
-</ul>
-<blockquote>
-<p>ok，这就配置好了</p>
-</blockquote>
-<h1 id="缓存短信验证码优化"><a href="#缓存短信验证码优化" class="headerlink" title="缓存短信验证码优化"></a>缓存短信验证码优化</h1><blockquote>
-<p>之前用的是 <code>session</code> 存储验证码，而 session 的默认存活时间是<code>三十分钟</code>，显然不符合验证码的逻辑，现在改造为将验证码缓存在<code>redis</code>中</p>
-</blockquote>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><ol>
-<li>在服务端 <code>UserController</code> 中注入 <code>RedisTemplate </code>对象，用于操作redis</li>
-<li>在服务端 <code>UserController</code> 的 <code>sendMsg</code> 方法中，将随机生成的验证码缓存到 redis 中，并设置有效期<code>5</code>分钟</li>
-<li>在服务端 <code>UserController</code> 的 <code>login</code> 方法中， 从 redis 中获取缓存的验证码，如果登录成功则<code>删除</code>redis的验证码</li>
-</ol>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
-<li>在 <code>UserServiceImpl</code> 中 注入 <code>RedisTemplate</code>,将验证码存入 redis 中，并设置有效时间</li>
-</ul>
-<p><code>UserServiceImpl</code> 的 <code>sendMsg</code> 实现方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">redisTemplate.opsForValue().set(phone,code,<span class="number">5</span>, TimeUnit.MINUTES);</span><br></pre></td></tr></table></figure>
-
-
-<p><code>UserServiceImpl</code> 的 <code>login</code> 实现方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">#从redis 中获取验证码</span><br><span class="line"> <span class="type">Object</span> <span class="variable">codeInSession</span> <span class="operator">=</span> redisTemplate.opsForValue().get(phone);</span><br></pre></td></tr></table></figure>
-<p>如果登录成功，删除redis缓存的验证码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//        删除验证码</span></span><br><span class="line">        redisTemplate.delete(phone);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>UserServiceImpl 完整代码<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">extends</span> <span class="title class_">ServiceImpl</span>&lt;UserMapper, User&gt; <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 验证码发送</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> user</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> session</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMsg</span><span class="params">(User user, HttpSession session)</span> &#123;</span><br><span class="line">        <span class="comment">//获取手机号</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> user.getPhone();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成 4位数 验证码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> ValidateCodeUtils.generateValidateCode(<span class="number">4</span>).toString();</span><br><span class="line">        <span class="comment">//调用阿里云，发送手机验证码</span></span><br><span class="line"><span class="comment">//            SMSUtils.sendMessage(&quot;阿里云短信测试&quot;, &quot;SMS_154950909&quot;,phone,code);</span></span><br><span class="line">        <span class="comment">//生成的验证码 保存到 session</span></span><br><span class="line"><span class="comment">//        session.setAttribute(phone, code);</span></span><br><span class="line">        redisTemplate.opsForValue().set(phone,code,<span class="number">5</span>, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;code:&#123;&#125;&quot;</span>, code);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 登录</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> map</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> session</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">login</span><span class="params">(Map map, HttpSession session)</span> &#123;</span><br><span class="line">        <span class="comment">//获取手机号</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">phone</span> <span class="operator">=</span> map.get(<span class="string">&quot;phone&quot;</span>).toString();</span><br><span class="line">        <span class="comment">//获取验证码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> map.get(<span class="string">&quot;code&quot;</span>).toString();</span><br><span class="line">        <span class="comment">//获取session中的验证码,根据 key 获取 value</span></span><br><span class="line"><span class="comment">//        Object codeInSession = session.getAttribute(phone);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//从redis 中获取 验证码</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">codeInSession</span> <span class="operator">=</span> redisTemplate.opsForValue().get(phone);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//对比验证码</span></span><br><span class="line">        <span class="keyword">if</span> (!(codeInSession != <span class="literal">null</span> &amp;&amp; codeInSession.equals(code))) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">CustomException</span>(<span class="string">&quot;验证码错误&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果正确，登录</span></span><br><span class="line"><span class="comment">//        删除验证码</span></span><br><span class="line">        redisTemplate.delete(phone);</span><br><span class="line">        <span class="comment">//判断是否为新用户，如果不是，自动注册为新用户</span></span><br><span class="line">        LambdaQueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        queryWrapper.eq(User::getPhone, phone);</span><br><span class="line">        <span class="comment">//查询数据库，如果查出不等于空，直接返回对象</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.getOne(queryWrapper);</span><br><span class="line">        <span class="comment">//如果等于空，注册</span></span><br><span class="line">        <span class="keyword">if</span> (user == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//是新用户</span></span><br><span class="line">            user = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">            user.setPhone(phone);</span><br><span class="line">            user.setStatus(<span class="number">1</span>);</span><br><span class="line">            userService.save(user);</span><br><span class="line">        &#125;</span><br><span class="line">        session.setAttribute(<span class="string">&quot;user&quot;</span>, user.getId());</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h2><ol>
-<li><p>运行idea，打开网页进入到界面,输入手机号获取验证码<br><img src="https://pic.imgdb.cn/item/648019881ddac507cc8a14df.jpg"><br><img src="https://pic.imgdb.cn/item/6480197f1ddac507cc8a0c7c.jpg"></p>
-</li>
-<li><p>登陆进去以后查看redis 是否已经删除<br><img src="https://pic.imgdb.cn/item/648019e91ddac507cc8a7c7e.jpg"></p>
-</li>
-</ol>
-<ul>
-<li>那么这就ok了</li>
-</ul>
-<h1 id="缓存菜品数据"><a href="#缓存菜品数据" class="headerlink" title="缓存菜品数据"></a>缓存菜品数据</h1><h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><blockquote>
-<p>前面我们已经实现了移动端菜品查看功能，对应的服务端方法为DishController的list方法，此方法会根据前端提交的查询条件进行数据库查询操作。在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长。现在需要对此方法进行缓存优化，提高系统的性能。</p>
-</blockquote>
-<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
-<li>思路分析<ol>
-<li>改造DishController的list方法，先从Redis中获取菜品数据，如果有则直接返回，无需查询数据库;如果没有则查询数据库，并将查询到的菜品数据放入Redis。</li>
-<li>改造DishController的save和update方法，加入清理缓存的逻辑<blockquote>
-<p>注意事项:使用缓存过程中，要注意保证数据库中的数据和缓存中的数据一致，如果数据库中的数据发生变化，需要及时清理缓存数据。</p>
-</blockquote>
-</li>
-</ol>
-</li>
-</ul>
-<ol>
-<li><p>先在DishController中注入RedisTemplate</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RedisTemplate redisTemplate;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在dishservice中实现方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据条件查询</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dish</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;DishDto&gt; <span class="title function_">getByList</span><span class="params">(Dish dish)</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">+       List&lt;DishDto&gt; dishDtoList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">+       <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dish.getCategoryId() + <span class="string">&quot;_&quot;</span>  + dish.getStatus();</span><br><span class="line">+        dishDtoList = (List&lt;DishDto&gt;) redisTemplate.opsForValue().get(key);</span><br><span class="line">+        <span class="keyword">if</span> (dishDtoList != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> dishDtoList;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//条件查询器</span></span><br><span class="line">        LambdaQueryWrapper&lt;Dish&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//过滤id</span></span><br><span class="line">        queryWrapper.eq(dish.getCategoryId() != <span class="literal">null</span>, Dish::getCategoryId, dish.getCategoryId());</span><br><span class="line">        <span class="comment">//过滤状态</span></span><br><span class="line">        queryWrapper.eq(Dish::getStatus, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//排序条件</span></span><br><span class="line">        queryWrapper.orderByDesc(Dish::getSort).orderByAsc(Dish::getUpdateTime);</span><br><span class="line">        <span class="comment">//获取查询到的结果作为返回值</span></span><br><span class="line">        List&lt;Dish&gt; list = dishService.list(queryWrapper);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">         dishDtoList = list.stream().map(item -&gt; &#123;</span><br><span class="line">            <span class="type">DishDto</span> <span class="variable">dishDto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DishDto</span>();</span><br><span class="line">            <span class="comment">//对象拷贝</span></span><br><span class="line">            BeanUtils.copyProperties(item, dishDto);</span><br><span class="line">            <span class="comment">//获取分类id</span></span><br><span class="line">            <span class="type">Long</span> <span class="variable">categoryId</span> <span class="operator">=</span> item.getCategoryId();</span><br><span class="line">            <span class="comment">//根据id获取分类对象</span></span><br><span class="line">            <span class="type">Category</span> <span class="variable">category</span> <span class="operator">=</span> categoryService.getById(categoryId);</span><br><span class="line">            <span class="keyword">if</span> (category != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">categoryName</span> <span class="operator">=</span> category.getName();</span><br><span class="line">                dishDto.setCategoryName(categoryName);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//获取当前菜品的id</span></span><br><span class="line">            <span class="type">Long</span> <span class="variable">id</span> <span class="operator">=</span> item.getId();</span><br><span class="line">            LambdaQueryWrapper&lt;DishFlavor&gt; dishFlavorLambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">            dishFlavorLambdaQueryWrapper.eq(DishFlavor::getDishId, id);</span><br><span class="line">            <span class="comment">//根据菜品id，查询到菜品口味</span></span><br><span class="line">            List&lt;DishFlavor&gt; dishFlavorList = dishFlavorService.list(dishFlavorLambdaQueryWrapper);</span><br><span class="line">            <span class="comment">//赋给dishDto的对应属性</span></span><br><span class="line">            dishDto.setFlavors(dishFlavorList);</span><br><span class="line">            <span class="keyword">return</span> dishDto;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">         <span class="comment">//如果不存在,那么需要查询数据库,并将查询到的菜品放入缓存,有效期六十分钟</span></span><br><span class="line">+        redisTemplate.opsForValue().set(key,dishDtoList,<span class="number">60</span>, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dishDtoList;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改DishServiceImpl中的<code>update</code>和<code>save</code>和批量修改方法(<code>status</code>)，加入清理缓存的逻辑</p>
-<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">update</button></li><li class="tab"><button type="button" data-href="#tab1-2">save</button></li><li class="tab"><button type="button" data-href="#tab1-3">status</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id修改菜品</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateWithFlavor</span><span class="params">(DishDto dto)</span> &#123;</span><br><span class="line">        <span class="comment">//修改 dish 表中数据</span></span><br><span class="line">        <span class="built_in">this</span>.updateById(dto);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先删除 dishFlavor 中的口味数据 ，执行 delete操作</span></span><br><span class="line">        LambdaQueryWrapper&lt;DishFlavor&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//通过对比得到和修改菜品id 相对应的 口味数据</span></span><br><span class="line">        queryWrapper.eq(DishFlavor::getDishId, dto.getId());</span><br><span class="line">        <span class="comment">//执行删除操作</span></span><br><span class="line">        dishFlavorService.remove(queryWrapper);</span><br><span class="line">        <span class="comment">//再将新的口味数据添加进 dish-flavor ，执行 insert 操作</span></span><br><span class="line">        List&lt;DishFlavor&gt; flavors = dto.getFlavors();</span><br><span class="line">        <span class="comment">//将前端传回的口味数据封装到 集合中</span></span><br><span class="line">        List&lt;DishFlavor&gt; list = flavors.stream().map(item -&gt; &#123;</span><br><span class="line">            <span class="comment">//将前端传回的菜品id封装到 flavors 中</span></span><br><span class="line">            item.setDishId(dto.getId());</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">        <span class="comment">//执行添加操作</span></span><br><span class="line">        dishFlavorService.saveBatch(list);</span><br><span class="line">        <span class="comment">//精确清除某个分类下的缓存</span></span><br><span class="line">+        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dto.getCategoryId() + <span class="string">&quot;_&quot;</span> + dto.getStatus();</span><br><span class="line">+        redisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增菜品同时，保存对应口味</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dto</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveWithFlavor</span><span class="params">(DishDto dto)</span> &#123;</span><br><span class="line">        <span class="comment">//保存菜品的基本信息到菜品表dish</span></span><br><span class="line">        <span class="built_in">this</span>.save(dto);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//从 dish 中获取id</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">dishId</span> <span class="operator">=</span> dto.getId();  <span class="comment">//保存菜品id</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//菜品口味</span></span><br><span class="line">        List&lt;DishFlavor&gt; flavors = dto.getFlavors();</span><br><span class="line">        flavors.stream().map((item) -&gt; &#123;</span><br><span class="line">            item.setDishId(dishId);</span><br><span class="line">            <span class="keyword">return</span> item;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//保存菜品口味数据到菜品口味表 dish——flavor</span></span><br><span class="line">        dishFlavorService.saveBatch(flavors);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//清空缓存数据</span></span><br><span class="line">+        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dto.getCategoryId() + <span class="string">&quot;_&quot;</span> + dto.getStatus();</span><br><span class="line">+        redisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 批量停售，启售</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> status</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ids</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateStatus</span><span class="params">(Integer status, List&lt;Long&gt; ids)</span> &#123;</span><br><span class="line">        LambdaUpdateWrapper&lt;Dish&gt; updateWrapper = <span class="keyword">new</span> <span class="title class_">LambdaUpdateWrapper</span>&lt;&gt;();</span><br><span class="line">        updateWrapper.in(ids != <span class="literal">null</span>, Dish::getId, ids);</span><br><span class="line">        updateWrapper.set(Dish::getStatus, status);</span><br><span class="line">+        LambdaQueryWrapper&lt;Dish&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">+        lambdaQueryWrapper.in(Dish::getId, ids);</span><br><span class="line">+        List&lt;Dish&gt; dishes = dishService.list(lambdaQueryWrapper);</span><br><span class="line">+            <span class="keyword">for</span> (Dish dish : dishes) &#123;</span><br><span class="line">+                 <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;dish_&quot;</span> + dish.getCategoryId() + <span class="string">&quot;_1&quot;</span>;</span><br><span class="line">+                   redisTemplate.delete(key);</span><br><span class="line">+              &#125;</span><br><span class="line">        dishService.update(updateWrapper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div></li>
-</ol>
-<h2 id="bug"><a href="#bug" class="headerlink" title="bug"></a>bug</h2><ul>
-<li>在实现过程中，使用老师给的<code>redis</code>配置类出现了bug，菜品的实现类中的创造时间和修改时间使用的 <code>LocalDateTime</code> 类型，redis存的进去，但取不出来。正常运行，但是前后端联调时，移动端的菜品信息都无法访问，在找了资料后才发现是redis貌似不支持 <code>LocalDateTime</code> 的类型。所以我更改了redis<code>配置类</code></li>
-</ul>
-<h3 id="更改RedisConfig"><a href="#更改RedisConfig" class="headerlink" title="更改RedisConfig"></a>更改<code>RedisConfig</code></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redis配置类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"><span class="comment">//     extends CachingConfigurerSupport</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    @Bean</span></span><br><span class="line"><span class="comment">//    public RedisTemplate&lt;Object, Object&gt; redisTemplate(RedisConnectionFactory connectionFactory) &#123;</span></span><br><span class="line"><span class="comment">//        RedisTemplate&lt;Object, Object&gt; redisTemplate = new RedisTemplate&lt;&gt;();</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        //默认的Key序列化器为：JdkSerializationRedisSerializer</span></span><br><span class="line"><span class="comment">//        redisTemplate.setKeySerializer(new StringRedisSerializer()); // key序列化</span></span><br><span class="line"><span class="comment">//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); // value序列化</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//        redisTemplate.setConnectionFactory(connectionFactory);</span></span><br><span class="line"><span class="comment">//        return redisTemplate;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean()</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory factory)</span> &#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        Jackson2JsonRedisSerializer&lt;Object&gt; j2jrs = <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>&lt;&gt;(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">om</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        <span class="comment">// 解决jackson2无法反序列化LocalDateTime的问题</span></span><br><span class="line">        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</span><br><span class="line">        om.registerModule(<span class="keyword">new</span> <span class="title class_">JavaTimeModule</span>());</span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);</span><br><span class="line">        j2jrs.setObjectMapper(om);</span><br><span class="line">        <span class="comment">// 序列化 value 时使用此序列化方法</span></span><br><span class="line">        template.setValueSerializer(j2jrs);</span><br><span class="line">        template.setHashValueSerializer(j2jrs);</span><br><span class="line">        <span class="comment">// 序列化 key 时</span></span><br><span class="line">        <span class="type">StringRedisSerializer</span> <span class="variable">srs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>();</span><br><span class="line">        template.setKeySerializer(srs);</span><br><span class="line">        template.setHashKeySerializer(srs);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="更改Dihs-实现类"><a href="#更改Dihs-实现类" class="headerlink" title="更改Dihs 实现类"></a>更改Dihs 实现类</h3><ul>
-<li>同时在dish实现类的 创建时间和修改时间上加上注解<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建时间</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改时间</span></span><br><span class="line"><span class="meta">@TableField(fill = FieldFill.INSERT_UPDATE)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime updateTime;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><p><img src="https://pic.imgdb.cn/item/648135a31ddac507cc0b33cc.jpg"></p>
-<ul>
-<li>由于我们现在还没有编写套餐数据的缓存，所以我们现在可以用菜品数据和套餐数据做对比</li>
-<li>先手动点击一遍所有的分类，让Redis缓存（包括菜品分类和套餐分类）</li>
-<li>之后去控制台清空输出，方便我们后续对比<br>随后再次点击菜品分类，控制台日志不会输出SQL语句的日志</li>
-<li>但是点击套餐分类时，控制台会输出SQL语句的日志</li>
-<li>当我们对菜品数据进行任意形式的修改(修改&#x2F;添加&#x2F;删除&#x2F;改状态)时，缓存数据将被清理，同时重新查询，避免出现脏数据</li>
-</ul>
-<h1 id="缓存套餐数据"><a href="#缓存套餐数据" class="headerlink" title="缓存套餐数据"></a>缓存套餐数据</h1><h2 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h2><blockquote>
-<p>前面我们已经实现了移动端套餐查看功能，对应的服务端方法为SetmealController的list方法，此方法会根据前端提交的查询条件进行数据库查询操作。在高并发的情况下，频繁查询数据库会导致系统性能下降，服务端响应时间增长现在需要对此方法进行缓存优化，提高系统的性能。具体的实现思路如下:</p>
-</blockquote>
-<ol>
-<li>导入<code>Spring Cache</code>和<code>Redis</code>相关<code>maven</code>坐标</li>
-<li>在<code>application.yml</code>中配置缓存数据的过期时间</li>
-<li>在启动类上加入<code>@EnableCaching</code>注解，开启缓存注解功能,在<code>SetmealController</code>的list方法上加入<code>@Cacheable</code>注解</li>
-<li>在<code>SetmealController</code>的save和delete方法上加入<code>CacheEvict</code>注解</li>
-</ol>
-<h2 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h2><ul>
-<li>使用更方便的注解方式进行操作</li>
-</ul>
-<ol>
-<li>导入redis和cache的pom坐标，redis前期已经导入过了，所以只用导入cache的即可<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>在yml文件中增加缓存有效期配置<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">time-to-live:</span> <span class="number">1800000</span> <span class="comment">#缓存有效期,30分钟</span></span><br></pre></td></tr></table></figure></li>
-<li>启动类开启缓存注解<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@ServletComponentScan</span>       <span class="comment">//扫描注解，创建过滤器</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span>       <span class="comment">//事务支持</span></span><br><span class="line">+ <span class="meta">@EnableCaching</span>      <span class="comment">//开启缓存</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReggieApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class,args);</span><br><span class="line">        log.info(<span class="string">&quot;启动成功&quot;</span>);</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li>SermealService的getByList方法添加<code>Cacheable</code>注解<br>该注解的功能是：在方法执行前，<code>Spring</code>先查看缓存中是否有数据；如果有数据，则直接返回缓存数据；若没有数据，调用方法并将方法返回值放到缓存中<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据条件查询套餐</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> setmeal</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Cacheable</span> (value = <span class="string">&quot;setmealCache&quot;</span> ,key = <span class="string">&quot;#setmeal.id + &#x27;_&#x27; + setmeal.status&quot;</span> )</span><br><span class="line">    <span class="keyword">public</span> List&lt;Setmeal&gt; <span class="title function_">getByList</span><span class="params">(Setmeal setmeal)</span> &#123;</span><br><span class="line">        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//过滤，</span></span><br><span class="line">        queryWrapper.in(setmeal.getCategoryId() != <span class="literal">null</span>, Setmeal::getCategoryId, setmeal.getCategoryId() );</span><br><span class="line">        queryWrapper.eq(setmeal.getStatus() != <span class="literal">null</span>, Setmeal::getStatus, <span class="number">1</span>);</span><br><span class="line">        queryWrapper.orderByDesc(Setmeal::getUpdateTime);</span><br><span class="line">        List&lt;Setmeal&gt; list = setmealService.list(queryWrapper);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>测试的时候报错了，页面上的套餐数据报错了，错误码为<code>500</code>，原来是因为没有给 返回的 R类实现序列化接口</p>
-</blockquote>
-<ul>
-<li><p>添加即可</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">R</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Serializable</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>再次测试，成功，只有第一次访问的时候会执行查询sql，其余都是从缓存中读取的数据</p>
-</li>
-</ul>
-<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">deleteIdsWithSetmeal</button></li><li class="tab"><button type="button" data-href="#tab1-2">save</button></li><li class="tab"><button type="button" data-href="#tab1-3">update</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><p>执行删除时</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><p>执行新增时</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><p>执行批量停售启售时</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@CacheEvict(value = &quot;setmealCache&quot;,allEntries = true)</span>   <span class="comment">//删除这个value下的所有缓存数据</span></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<ul>
-<li>修改完毕之后，重启服务器测试看看有没有效果，如果有效果的话，我们push一下代码，继续做别的优化</li>
-</ul>
-<h1 id="mysql主从复制"><a href="#mysql主从复制" class="headerlink" title="mysql主从复制"></a>mysql主从复制</h1><p>什么是mysql主从复制？</p>
-<blockquote>
-<p>MySOL主从复制是一个异步的复制过程，底层是基于Mysql数据库自带的二进制日志功能。就是一台或多台MySOL数据库(slave，即从库)从另一台MySOL数据库(master，即主库)进行日志的复制然后再解析日志并应用到自身，最终实现从库的数据和主库的数据保持一致。MySOL主从复制是MySOL数据库<code>自带功能</code>，无需借助第三方工具。</p>
-</blockquote>
-<ul>
-<li>MySQL复制过程分成三步</li>
-</ul>
-<ol>
-<li>master将改变记录到二进制日志 (binary log)</li>
-<li>slave将master的binary log拷贝到它的中继日志 (relay log)</li>
-<li>slave重做中继日志中的事件，将改变应用到自己的数据库中</li>
-</ol>
-<p><img src="https://pic.imgdb.cn/item/6482b0e61ddac507cc5fe828.jpg"></p>
-<h2 id="配置主从复制"><a href="#配置主从复制" class="headerlink" title="配置主从复制"></a>配置主从复制</h2><ul>
-<li>前置条件<br>提前准备好两台服务器，分别安装mysqk并启动服务成功<ul>
-<li>主库 Master</li>
-<li>从库 Slave</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>一台使用虚拟机，一台用本机即可，我使用的是windows  cmd界面输入： <code>mysql -u root -p</code>  回车即可</p>
-</blockquote>
-<ul>
-<li>完成，当然现在他们还有没有任何关系<br><img src="https://pic.imgdb.cn/item/6482b38c1ddac507cc630ac2.jpg"></li>
-</ul>
-<h3 id="配置主库-master"><a href="#配置主库-master" class="headerlink" title="配置主库 master"></a>配置主库 master</h3><ol>
-<li><p>修改Mysql数据库的配置文件，我这里使用虚拟机的数据库作为主库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin  #[必须]启动二进制日志</span><br><span class="line">server-id=100   # [必须]服务器唯一ID</span><br></pre></td></tr></table></figure></li>
-<li><p><code>重启</code>mysql服务</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第三步: 登录<code>Mysql</code>数据库，执行下面SQL</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> REPLICATION SLAVE <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;xiaoming&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> Root<span class="variable">@123456</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面SOL的作用是创建一个用户xiaoming,密码为Root@123456，并且给xiaoming用户授予REPLICATION SLAVE权限。常用于建立复制时所需要用到的用户权限，也就是slave必须被master授权具有该权限的用户，才能通过该用户复制。</p>
-</blockquote>
-</li>
-</ol>
-<ul>
-<li>mysql版本<code>8</code> 或 <code>8以上</code>依次使用以下两条命令<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE USER 用户名 IDENTIFIED WITH &#x27;mysql_native_password&#x27; BY &#x27;密码&#x27;;</span><br><span class="line"> GRANT REPLICATION SLAVE ON *.* TO 用户名;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ol start="4">
-<li>记录值</li>
-</ol>
-<ul>
-<li>登录mysql数据库，执行下面sql，记录下结果中 <code>file</code> 和 <code>position</code> 的值,<br>很重要！输入完这条命令后，不要再有任何操作！，一会从库就靠这两个值定位<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
-mysql-bin.000001 |     1200</li>
-</ul>
-<h3 id="配置从库Slave"><a href="#配置从库Slave" class="headerlink" title="配置从库Slave"></a>配置从库Slave</h3><ol>
-<li>直接虚拟机克隆一下然后改下<code>ip</code>和mysql配置文件就可以了</li>
-</ol>
-<ul>
-<li>右键单击虚拟机 -&gt; 管理 -&gt; 克隆</li>
-</ul>
-<ol start="2">
-<li><p>修改mysql的uuid，找到以后进去随便改一个就行</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -iname &quot;auto.cnf&quot;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在第二个服务器的mysql配置文件的 [mysqld]下 新增</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server-id=100 [保证id是唯一不重复即可，自定义]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登录mysql数据库,<code>mysql8以下</code>的执行下面的sql</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">change master to master_host=&#x27;192.168.10.102&#x27;,master_user=&quot;xiaoming&quot;,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000002&#x27;,master_log_pos=157;</span><br></pre></td></tr></table></figure>
-<p><code>mysql8</code>版本执行以下sql</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">change master to master_host=&#x27;192.168.10.102&#x27;,master_user=&quot;xiaoming&quot;,master_password=&#x27;Root@123456&#x27;,master_log_file=&#x27;mysql-bin.000003&#x27;,master_log_pos=157,get_master_public_key=1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行后使用 <code>show slave status</code> 或 <code>show slave status\G</code> 查看</p>
-</li>
-</ol>
-<ul>
-<li><pre><code>      Slave_IO_Running: Yes
-      Slave_SQL_Running: Yes
-</code></pre>
-</li>
-</ul>
-<p>确认这两个状态都为yes<br><img src="https://pic.imgdb.cn/item/6482de8e1ddac507ccaf4917.jpg"></p>
-<ol start="5">
-<li>使用navicat 验证， 连接上以后在主表创建数据库和表，刷新后子表也同样有了同样的库和表</li>
-</ol>
-<ul>
-<li>配置完成</li>
-</ul>
-<h2 id="读写分离案例"><a href="#读写分离案例" class="headerlink" title="读写分离案例"></a>读写分离案例</h2><blockquote>
-<p>背景：<br>面对日益增加的系统访问量，数据库的吞吐量面临着巨大瓶颈。对于同一时刻有大量并发读操作和较少写操作类型的应用系统来说，将数据库拆分为主库和从库，主库负责处理事务性的增删改操作，从库负责处理查询操作，能够有效的避免由数据更新导致的行锁，使得整个系统的查询性能得到极大的改善<br><img src="https://pic.imgdb.cn/item/6482ea161ddac507ccc3c134.jpg"></p>
-</blockquote>
-<ul>
-<li>使用Sharding-JDBC实现读写分离步骤</li>
-</ul>
-<ol>
-<li><p>导入maven坐标</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sharding-jdbc-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0-RC1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在配置文件中配置读写分离规则</p>
-</li>
-<li><p>在配置文件中配置允许bean定义覆盖配置项</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>在配置文件中配置允许bean定义覆盖配置项</p>
-</li>
-</ol>
-<ul>
-<li>在 yml 文件中加入main配置项<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/rw?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="string">+</span>  <span class="attr">main:</span></span><br><span class="line"><span class="string">+</span>    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行程序，使用postman联调，注意看控制台输出的日志，运行的是主库还是从库</p>
-<h2 id="读写分离应用到项目"><a href="#读写分离应用到项目" class="headerlink" title="读写分离应用到项目"></a>读写分离应用到项目</h2><h3 id="数据库环境准备-主从复制"><a href="#数据库环境准备-主从复制" class="headerlink" title="数据库环境准备(主从复制)"></a>数据库环境准备(主从复制)</h3><ul>
-<li>直接使用前面在虚拟机搭建的主从复制的数据库环境即可</li>
-<li>在数据库创建瑞吉外卖项目的业务数据库并导入相关表结构和数据</li>
-<li>只用在主库操作即可，从库会自动复制主库数据</li>
-</ul>
-<ol>
-<li>主表创建<code>reggie</code>数据库<br><img src="https://pic.imgdb.cn/item/6482ff741ddac507cce58ccc.jpg"></li>
-<li>运行之前数据库导出的<code>sql</code>文件,导出时选择结构和数据<br><img src="https://pic.imgdb.cn/item/6482ffe11ddac507cce67da8.jpg"></li>
-</ol>
-<h3 id="代码改造"><a href="#代码改造" class="headerlink" title="代码改造"></a>代码改造</h3><ul>
-<li>在项目中加入 <code>Sharding-JDBC</code> 实现读写分离步骤：<br>首先新建一个分支，在新的分支上实现代码的优化，最后测试没有问题再合并到主分支上</li>
-</ul>
-<ol>
-<li><p>导入maven坐标</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--sharding-jdbc--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shardingsphere<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sharding-jdbc-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.0-RC1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在配置文件配置读写分离规则,替换掉<code>datasourse</code>,记得要修改数据库名字</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>在配置文件配置<code>允许bean定义覆盖</code>配置项</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">shardingsphere:</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span></span><br><span class="line">        <span class="string">master,slave</span></span><br><span class="line">      <span class="comment"># 主数据源</span></span><br><span class="line">      <span class="attr">master:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.100:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">      <span class="comment"># 从数据源</span></span><br><span class="line">      <span class="attr">slave:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.138.101:3306/reggie?characterEncoding=utf-8</span></span><br><span class="line">        <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">masterslave:</span></span><br><span class="line">      <span class="comment"># 读写分离配置</span></span><br><span class="line">      <span class="attr">load-balance-algorithm-type:</span> <span class="string">round_robin</span></span><br><span class="line">      <span class="comment"># 最终的数据源名称</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">dataSource</span></span><br><span class="line">      <span class="comment"># 主库数据源名称</span></span><br><span class="line">      <span class="attr">master-data-source-name:</span> <span class="string">master</span></span><br><span class="line">      <span class="comment"># 从库数据源名称列表，多个逗号分隔</span></span><br><span class="line">      <span class="attr">slave-data-source-names:</span> <span class="string">slave</span></span><br><span class="line">    <span class="attr">props:</span></span><br><span class="line">      <span class="attr">sql:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span> <span class="comment">#开启SQL显示，默认false</span></span><br><span class="line"><span class="string">+</span>  <span class="attr">main:</span></span><br><span class="line"><span class="string">+</span>    <span class="attr">allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment">#在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">ASSIGN_ID</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="功能测试-1"><a href="#功能测试-1" class="headerlink" title="功能测试"></a>功能测试</h3><ul>
-<li>如果启动不报错，基本上就问题不大了</li>
-<li>服务正常启动，测试读写分离</li>
-</ul>
-<blockquote>
-<p>启动测试，前后端联调,没有问题ok！</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>编程学习</category>
-      </categories>
-      <tags>
-        <tag>实战项目</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Swagger</title>
-    <url>//2023/06/10/Swagger/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>使用Swagger你只需要按照它的规范去定义接口及接口相关的信息，再通过Swagger衍生出来的一系列项目和工具就可以做到生成各种格式的接口文档，以及在线接口调试页面等等。</p>
-<blockquote>
-<p>官网：<a href="https://swagger.io/">https://swagger.io/</a></p>
-</blockquote>
-<p>knife4j是为Java MVC框架<code>集成Swagger</code>生成Api文档的增强解决方案</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
-<li>操作步骤<ol>
-<li><p>导入knife4j的maven坐标</p>
-  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.xiaoymin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>knife4j-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>导入knife4j相关配置类,加上 <code>@EnableSwagger2</code>、 <code>@EnableKnife4j</code>注解</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">      <span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> Docket <span class="title function_">createRestApi</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 文档类型</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .select()</span><br><span class="line">            .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.yin.reggie.controller&quot;</span>))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">            .title(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">            .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">            .description(<span class="string">&quot;hello接口文档&quot;</span>)</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置静态资源，否则接口文档界面无法访问</p>
-  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置静态资源映射</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> &#123;</span><br><span class="line">    log.info(<span class="string">&quot;开始进行静态资源映射...&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;doc.html&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/&quot;</span>);</span><br><span class="line">    registry.addResourceHandler(<span class="string">&quot;/webjars/**&quot;</span>).addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在LoginCheckFilter中设置不需要处理的请求路径</p>
-</li>
-</ol>
-</li>
-</ul>
-<h1 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h1><table>
-<thead>
-<tr>
-<th align="left">注解</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">@Api</td>
-<td align="center">用在请求的类上，例如controller，表示对类的说明</td>
-</tr>
-<tr>
-<td align="left">@Apimodel</td>
-<td align="center">用在类上，通常是实体类，表示一个返回响应数据的信息</td>
-</tr>
-<tr>
-<td align="left">@ApimodelProperty</td>
-<td align="center">用在属性上，描述响应类的属性</td>
-</tr>
-<tr>
-<td align="left">@ApiOperation</td>
-<td align="center">用在请求的方法上，说明方法的用途，作用</td>
-</tr>
-<tr>
-<td align="left">@ApilmplicitParams</td>
-<td align="center">用在请求的方法上，表示一组参数说明</td>
-</tr>
-<tr>
-<td align="left">@ApilmplicitParam</td>
-<td align="center">用在@ApilmplicitParams注解中，指定一个请求参数的各个方面</td>
-</tr>
-</tbody></table>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>YApi</title>
-    <url>//2023/06/10/YApi/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h1><p>&amp;emsp;&amp;emsp;YApi 是高效、易用、功能强大的 api管理平台，旨在为开发、产品、测试人员提供更优雅的接口管理服务。可以帮助开发者轻松创建、发布、维护 APL，YApi 还为用户提供了优秀的交互体验，开发人员只需利用平台提供的接口数据写入工具以及简单的点击操作就可以实现接口的管理。YApi让接口开发更简单高效，让接口的管理更具可读性、可维护性，让团队协作更合理<br><br></p>
-<blockquote>
-<p>源码地址: <a href="https://github.com/YMFE/yapi">https://github.com/YMFE/yapi</a></p>
-</blockquote>
-<br>
-要使用API，需要自己进行部署
-<br>
-<br>
-
-<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a><strong>使用方式</strong></h1><p>使用Yapi，可以执行下面的操作</p>
-<ul>
-<li>添加项目</li>
-<li>添加分类</li>
-<li>添加接口</li>
-<li>编辑接口</li>
-<li>查看接口</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是前后端分离开发</title>
-    <url>//2023/06/10/%E4%BB%80%E4%B9%88%E6%98%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong><center>介绍</center></strong></h3><br>
- 
-<p><strong>前后端分离开发</strong>，就是在项目开发过程中，对于前端代码的开发由专门的<strong>前端开发人员</strong>负责，后端代码则由<strong>后端开发人员</strong>负责，这样可以做到分工明确、各司其职，提高开发效率，前后端代码并行开发，可以加快项目开发进度。目前，前后端分离开发方式已经被越来越多的公司所采用，成为当前项目开发的主流开发方式。</p>
-<p>前后端分离开发后，从工程机构上也会发生变化，即前后端代码不再混合在同一个maven工程中，而是分为<strong>前端工程</strong>和<strong>后端工程</strong>。<br><img src="https://pic.imgdb.cn/item/6483d4491ddac507cc1343b5.jpg"></p>
-<br>
-<br>
-<br>
-
-<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a><strong><center>开发流程</center></strong></h3><p>&amp;emsp;&amp;emsp;前后端分离开发后，面临一个问题，就是前端开发人员和后端开发人员如何进行配合来共同开发一个项目？可以按照如下流程进行:<br><img src="https://pic.imgdb.cn/item/6483d5071ddac507cc13fc80.jpg"></p>
-<ul>
-<li><strong>接口(API接口)</strong> 就是一个http的请求地址，主要就是去定义:请求路径、请求方式、请求参数、响应数据等内容。</li>
-</ul>
-<p><strong><center>前端技术栈</center></strong><br><strong>开发工具</strong></p>
-<ul>
-<li>Visual Studio Code</li>
-<li>hbuilder</li>
-</ul>
-<p><strong>技术框架</strong></p>
-<ul>
-<li>nodejs</li>
-<li>VUE</li>
-<li>ElementUI</li>
-<li>mock</li>
-<li>webpack</li>
-</ul>
-]]></content>
   </entry>
 </search>
