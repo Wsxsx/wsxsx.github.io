@@ -2897,10 +2897,10 @@ mysql-bin.000001 |     1200</li>
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>168.6万</span></span>
+                        <span>170.8万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>6.3万</span></span></p>
+                        <span>6.4万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -3419,7 +3419,310 @@ mysql-bin.000001 |     1200</li>
 </li>
 </ul>
 <h4 id="Hash结构操作"><a href="#Hash结构操作" class="headerlink" title="Hash结构操作"></a>Hash结构操作</h4><p>这个代码就不再解释</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 哈希结构数据操作</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RedisStringTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testHash</span><span class="params">()</span> &#123;</span><br><span class="line">        stringRedisTemplate.opsForHash().put(<span class="string">&quot;user:400&quot;</span>,<span class="string">&quot;name&quot;</span>,<span class="string">&quot;赵六&quot;</span>);</span><br><span class="line">        stringRedisTemplate.opsForHash().put(<span class="string">&quot;user:400&quot;</span>,<span class="string">&quot;age&quot;</span>,<span class="string">&quot;18&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Map&lt;Object, Object&gt; entries = stringRedisTemplate.opsForHash().entries(<span class="string">&quot;user:400&quot;</span>);</span><br><span class="line">        System.out.println(entries);</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 哈希结构数据操作</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RedisStringTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testHash</span><span class="params">()</span> &#123;</span><br><span class="line">        stringRedisTemplate.opsForHash().put(<span class="string">&quot;user:400&quot;</span>,<span class="string">&quot;name&quot;</span>,<span class="string">&quot;赵六&quot;</span>);</span><br><span class="line">        stringRedisTemplate.opsForHash().put(<span class="string">&quot;user:400&quot;</span>,<span class="string">&quot;age&quot;</span>,<span class="string">&quot;18&quot;</span>);</span><br><span class="line"></span><br><span class="line">        Map&lt;Object, Object&gt; entries = stringRedisTemplate.opsForHash().entries(<span class="string">&quot;user:400&quot;</span>);</span><br><span class="line">        System.out.println(entries);</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>之后去数据库把这个数据修改一下，这样逻辑过期前和逻辑过期后的数据就不一致，当用户来访问数据的时候，需要花时间来进行重构缓存数据，但是在重构完成之前，都只能获得脏数据（也就是我们修改前的数据），只有当重构完毕之后，才能获得新数据（我们修改后的数据）</li>
+</ul>
+<h4 id="封装Redis工具类"><a href="#封装Redis工具类" class="headerlink" title="封装Redis工具类"></a>封装Redis工具类</h4><p>基于StringRedisTemplate封装一个缓存工具类，满足下列需求：</p>
+<ul>
+<li><p>方法1：将任意Java对象序列化为json并存储在string类型的key中，并且可以设置TTL过期时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(String key, Object value, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line">    stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), time, timeUnit);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>方法2：将任意Java对象序列化为json并存储在string类型的key中，并且可以设置逻辑过期时间，用于处理缓存击穿问题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWithLogicExpire</span><span class="params">(String key, Object value, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line">    <span class="comment">//由于需要设置逻辑过期时间，所以我们需要用到RedisData</span></span><br><span class="line">    RedisData&lt;Object&gt; redisData = <span class="keyword">new</span> <span class="title class_">RedisData</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">//redisData的data是传进来的value对象</span></span><br><span class="line">    redisData.setData(value);</span><br><span class="line">    <span class="comment">//逻辑过期时间就是当前时间加上传进来的参数时间，用TimeUnit可以将时间转为秒，随后与当前时间相加</span></span><br><span class="line">    redisData.setExpireTime(LocalDateTime.now().plusSeconds(timeUnit.toSeconds(time)));</span><br><span class="line">    <span class="comment">//由于是逻辑过期，这里不需要设置过期时间，只存一下key和value就好了，同时注意value是ridisData类型</span></span><br><span class="line">    stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(redisData));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>方法3：根据指定的key查询缓存，并反序列化为指定类型，利用缓存空值的方式解决缓存穿透问题</p>
+<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">原方法</button></li><li class="tab"><button type="button" data-href="#tab1-2">通用型</button></li><li class="tab"><button type="button" data-href="#tab1-3">使用方法</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Shop <span class="title function_">queryWithPassThrough</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">      <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> CACHE_SHOP_KEY + id;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">shopJson</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">      <span class="keyword">if</span> (StrUtil.isNotBlank(shopJson)) &#123;</span><br><span class="line">          <span class="comment">//3.命中，返回商铺信息</span></span><br><span class="line">          <span class="keyword">return</span> JSONUtil.toBean(shopJson, Shop.class);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (shopJson != <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">//返回错误信息</span></span><br><span class="line">          <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//4.未命中，根据id查询数据库</span></span><br><span class="line">      <span class="type">Shop</span> <span class="variable">shop</span> <span class="operator">=</span> getById(id);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//5.判断数据库是否存在</span></span><br><span class="line">      <span class="keyword">if</span> (shop == <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">//6.数据库中不存在，将空值写入redis,返回错误信息</span></span><br><span class="line">          stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//7. 数据库中存在，将其存入缓存</span></span><br><span class="line">      stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(shop), CACHE_SHOP_TTL, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//8.向前端返回结果</span></span><br><span class="line">      <span class="keyword">return</span> shop;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><ul>
+<li>改为通用方法，那么返回值就需要进行修改，不能返回<code>Shop</code>了，那我们直接设置一个泛型，同时ID的类型，也不一定都是<code>Long</code>类型，所以我们也采用泛型。</li>
+<li>Key的前缀也会随着业务需求的不同而修改，所以参数列表里还需要加入Key的前缀</li>
+<li>通过id去数据库查询的具体业务需求我们也不清楚，所以我们也要在参数列表中加入一个查询数据库逻辑的函数</li>
+<li>最后再加上设置TTL需要的两个参数</li>
+<li>那么综上所述，我们的参数列表需要<ul>
+<li>key前缀</li>
+<li>id（类型泛型）</li>
+<li>返回值类型（泛型）</li>
+<li>查询的函数</li>
+<li>TTL需要的两个参数<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;R, ID&gt; R <span class="title function_">queryWithPassThrough</span><span class="params">(</span></span><br><span class="line"><span class="params">        String keyPrefix, ID id, Class&lt;R&gt; type, Function&lt;ID,R&gt; dbFallback,Long time,TimeUnit timeUnit)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line">    <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">    <span class="keyword">if</span> (StrUtil.isNotBlank(json)) &#123;</span><br><span class="line">        <span class="comment">//3.命中，返回商铺信息</span></span><br><span class="line">        <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (json != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//返回错误信息</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.未命中，根据id查询数据库</span></span><br><span class="line">    <span class="comment">//不知道调用着查询的什么库，所以采用函数式编程，让调用者告诉我们</span></span><br><span class="line">    <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> dbFallback.apply(id);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5.判断数据库是否存在</span></span><br><span class="line">    <span class="keyword">if</span> (r == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//6.数据库中不存在，将空值写入redis,返回错误信息</span></span><br><span class="line">        stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//7. 数据库中存在，将其存入缓存</span></span><br><span class="line">    <span class="built_in">this</span>.set(key,r,time,timeUnit);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//8.向前端返回结果</span></span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">queryById</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">    <span class="type">Shop</span> <span class="variable">shop</span> <span class="operator">=</span> cacheClient.</span><br><span class="line">            queryWithPassThrough(CACHE_SHOP_KEY, id, Shop.class, <span class="built_in">this</span>::getById, CACHE_SHOP_TTL, TimeUnit.MINUTES);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (shop == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result.fail(<span class="string">&quot;店铺不存在！！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Result.ok(shop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</li>
+<li><p>方法4：根据指定的key查询缓存，并反序列化为指定类型，需要利用逻辑过期解决缓存击穿问题,将逻辑进行封装</p>
+<br></li>
+</ul>
+<p>参考上面思路</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//缓存穿透参考缓存击穿</span></span><br><span class="line">  <span class="comment">//逻辑过期</span></span><br><span class="line">  <span class="keyword">public</span>  &lt;R,ID&gt; R <span class="title function_">queryWithLogicalExpire</span><span class="params">(</span></span><br><span class="line"><span class="params">          String keyPrefix, ID id,Class&lt;R&gt; type,Function&lt;ID,R&gt; dbFallback,Long time,TimeUnit timeUnit)</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line">      <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">Json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">      <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">      <span class="keyword">if</span> (StrUtil.isBlank(Json)) &#123;</span><br><span class="line">          <span class="comment">//3.未命中直接返回空</span></span><br><span class="line">          <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//4. 命中，将json反序列化为对象</span></span><br><span class="line">      <span class="type">RedisData</span> <span class="variable">redisData</span> <span class="operator">=</span> JSONUtil.toBean(Json, RedisData.class);</span><br><span class="line">      <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> JSONUtil.toBean((JSONObject) redisData.getData(), type);</span><br><span class="line">      <span class="type">LocalDateTime</span> <span class="variable">expireTime</span> <span class="operator">=</span> redisData.getExpireTime();</span><br><span class="line">      <span class="comment">//5. 判断是否过期</span></span><br><span class="line">      <span class="keyword">if</span> (expireTime.isAfter(LocalDateTime.now())) &#123;</span><br><span class="line">          <span class="comment">//5.1未过期，直接返回店铺信息</span></span><br><span class="line">          <span class="keyword">return</span> r;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//5.2 已过期，需要缓存重建</span></span><br><span class="line">      <span class="comment">//6. 缓存重建</span></span><br><span class="line">      <span class="comment">//6.1获取互斥锁</span></span><br><span class="line">      <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> LOCK_SHOP_KEY + id;</span><br><span class="line">      <span class="type">boolean</span> <span class="variable">lock</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line">      <span class="comment">//这里锁的key和前面缓存的key不是同一个</span></span><br><span class="line">      <span class="comment">//6.2  判断是否获取锁</span></span><br><span class="line">      <span class="keyword">if</span> (lock) &#123;</span><br><span class="line">          <span class="comment">//检测reids缓存是否过期</span></span><br><span class="line">          <span class="type">LocalDateTime</span> <span class="variable">doubleCheckExpireTime</span> <span class="operator">=</span> redisData.getExpireTime();</span><br><span class="line">          <span class="keyword">if</span> (doubleCheckExpireTime.isAfter(LocalDateTime.now())) &#123;</span><br><span class="line">              <span class="keyword">return</span> r;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 6.3 开启独立线程，当前线程返回商铺信息</span></span><br><span class="line">          CACHE_REBUILD_EXECUTOR.submit(() -&gt; &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                  <span class="comment">//重建缓存</span></span><br><span class="line">                  <span class="comment">// 1.查询数据库</span></span><br><span class="line">                  <span class="type">R</span> <span class="variable">r1</span> <span class="operator">=</span> dbFallback.apply(id);</span><br><span class="line">                  <span class="comment">//2. 写入redis</span></span><br><span class="line">                  <span class="built_in">this</span>.setWithLogicalExpire(key,r1,time,timeUnit);</span><br><span class="line"></span><br><span class="line">              &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">              &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                  <span class="comment">//释放锁</span></span><br><span class="line">                  unlock(lockKey);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//6.4 未获取到锁</span></span><br><span class="line">      <span class="comment">//返回过期的商铺信息</span></span><br><span class="line">      <span class="keyword">return</span> r;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>方法5：根据指定的Key查询缓存，并反序列化为指定类型，需要利用互斥锁解决缓存击穿问题</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">    <span class="comment">//    互斥锁解决缓存击穿和缓存穿透</span></span><br><span class="line">    <span class="keyword">private</span> &lt;R,ID&gt; R <span class="title function_">queryWithMutex</span><span class="params">(String keyPrefix,ID id,Class&lt;R&gt; type,Function&lt;ID,R&gt; dbFallback,Long time,TimeUnit timeUnit)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">        <span class="keyword">if</span> (StrUtil.isNotBlank(json)) &#123;</span><br><span class="line">            <span class="comment">//3.命中，返回商铺信息</span></span><br><span class="line">            <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.判断是否命中空值</span></span><br><span class="line">        <span class="keyword">if</span> (json != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//返回错误信息</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4. 未命中，实现缓存重建</span></span><br><span class="line">        <span class="comment">//4.1 尝试获取互斥锁</span></span><br><span class="line">        <span class="comment">//这里锁的key和前面缓存的key不是同一个</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> LOCK_SHOP_KEY + id;</span><br><span class="line">        <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//4.2  判断是否获取锁</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line">            <span class="comment">//4.3 未获取到锁，休眠并重试</span></span><br><span class="line">            <span class="keyword">if</span> (!isLock) &#123;</span><br><span class="line">                Thread.sleep(<span class="number">50</span>);</span><br><span class="line">                <span class="keyword">return</span> queryWithMutex(keyPrefix,id,type,dbFallback,time,timeUnit);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//4.2 获取互斥锁成功</span></span><br><span class="line">            <span class="comment">//4.3 校验redis中是否存在，如果存在则无需重建缓存</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">doubleCheckShop</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line">            <span class="keyword">if</span> (StrUtil.isNotBlank(doubleCheckShop)) &#123;</span><br><span class="line">                <span class="comment">//这里做doubleCheck</span></span><br><span class="line">                <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 4.4 获取到锁，根据id查询数据库</span></span><br><span class="line">           r = dbFallback.apply(id);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//模拟重建休眠延时</span></span><br><span class="line"><span class="comment">//            Thread.sleep(200);</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//5.判断数据库是否存在</span></span><br><span class="line">            <span class="keyword">if</span> (r == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//6.数据库中不存在，将空值写入redis,返回错误信息</span></span><br><span class="line">                stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//7. 数据库中存在，将其存入缓存</span></span><br><span class="line">            <span class="built_in">this</span>.set(key, JSONUtil.toJsonStr(r),time, timeUnit);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//8.释放互斥锁</span></span><br><span class="line">            unlock(LOCK_SHOP_KEY + id);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//9.返回</span></span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完整代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hmdp.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.hutool.core.util.BooleanUtil;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.core.util.StrUtil;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.json.JSONObject;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.json.JSONUtil;</span><br><span class="line"><span class="keyword">import</span> com.hmdp.entity.RedisData;</span><br><span class="line"><span class="keyword">import</span> com.hmdp.entity.Shop;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Function;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> com.hmdp.utils.RedisConstants.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 缓存工具封装</span></span><br><span class="line"><span class="comment"> * 方法1：将任意java对象序列化为json并存储在string类型的key中，并且可以设置ttl过期时间</span></span><br><span class="line"><span class="comment"> * 方法2：将任意java对象序列化为json并存储在string类型的key中，并可以设置逻辑过期时间，用于处理缓存击穿问题</span></span><br><span class="line"><span class="comment"> * 方法3：根据指定的key查询缓存，并反序列化为指定类型，利用缓存空值的方式解决缓存穿透问题</span></span><br><span class="line"><span class="comment"> * 方法4：根据指定key查询缓存，并反序列化为指定类型，需要利用逻辑过期解决缓存击穿问题</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//互斥锁</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">flag</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().setIfAbsent(key, <span class="string">&quot;1&quot;</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">        <span class="comment">//为了避免null值，这里使用BooleanUtil工具类</span></span><br><span class="line">        <span class="keyword">return</span> BooleanUtil.isTrue(flag);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//释放锁</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">unlock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        stringRedisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建线程池</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">CACHE_REBUILD_EXECUTOR</span> <span class="operator">=</span> Executors.newFixedThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(String key, Object value, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line">        stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(value), time, timeUnit);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWithLogicalExpire</span><span class="params">(String key, Object value, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line">        <span class="comment">//设置逻辑过期</span></span><br><span class="line">        <span class="type">RedisData</span> <span class="variable">redisData</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RedisData</span>();</span><br><span class="line">        redisData.setData(value);</span><br><span class="line">        redisData.setExpireTime(LocalDateTime.now().plusSeconds(time));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//写入redis</span></span><br><span class="line">        stringRedisTemplate.opsForValue().set(key, JSONUtil.toJsonStr(redisData));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//由于不知道调用者使用什么类型，所以采用泛型,id同理</span></span><br><span class="line">    <span class="comment">//那么我还需要调用者传回id的前置</span></span><br><span class="line">    <span class="comment">//调用数据库时需要调用者的查库逻辑</span></span><br><span class="line">    <span class="comment">//最后设置的时间和时间类型</span></span><br><span class="line">    <span class="keyword">public</span> &lt;R, ID&gt; R <span class="title function_">queryWithPassThrough</span><span class="params">(</span></span><br><span class="line"><span class="params">            String keyPrefix, ID id, Class&lt;R&gt; type, Function&lt;ID, R&gt; dbFallback, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line">        <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">        <span class="keyword">if</span> (StrUtil.isNotBlank(json)) &#123;</span><br><span class="line">            <span class="comment">//3.命中，返回商铺信息</span></span><br><span class="line">            <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (json != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//返回错误信息</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.未命中，根据id查询数据库</span></span><br><span class="line">        <span class="comment">//不知道调用着查询的什么库，所以采用函数式编程，让调用者告诉我们</span></span><br><span class="line">        <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> dbFallback.apply(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.判断数据库是否存在</span></span><br><span class="line">        <span class="keyword">if</span> (r == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//6.数据库中不存在，将空值写入redis,返回错误信息</span></span><br><span class="line">            stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7. 数据库中存在，将其存入缓存</span></span><br><span class="line">        <span class="built_in">this</span>.set(key, r, time, timeUnit);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//8.向前端返回结果</span></span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//缓存穿透参考缓存击穿</span></span><br><span class="line">    <span class="comment">//逻辑过期</span></span><br><span class="line">    <span class="keyword">public</span> &lt;R, ID&gt; R <span class="title function_">queryWithLogicalExpire</span><span class="params">(</span></span><br><span class="line"><span class="params">            String keyPrefix, ID id, Class&lt;R&gt; type, Function&lt;ID, R&gt; dbFallback, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line">        <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">Json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">        <span class="keyword">if</span> (StrUtil.isBlank(Json)) &#123;</span><br><span class="line">            <span class="comment">//3.未命中直接返回空</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//4. 命中，将json反序列化为对象</span></span><br><span class="line">        <span class="type">RedisData</span> <span class="variable">redisData</span> <span class="operator">=</span> JSONUtil.toBean(Json, RedisData.class);</span><br><span class="line">        <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> JSONUtil.toBean((JSONObject) redisData.getData(), type);</span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">expireTime</span> <span class="operator">=</span> redisData.getExpireTime();</span><br><span class="line">        <span class="comment">//5. 判断是否过期</span></span><br><span class="line">        <span class="keyword">if</span> (expireTime.isAfter(LocalDateTime.now())) &#123;</span><br><span class="line">            <span class="comment">//5.1未过期，直接返回店铺信息</span></span><br><span class="line">            <span class="keyword">return</span> r;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//5.2 已过期，需要缓存重建</span></span><br><span class="line">        <span class="comment">//6. 缓存重建</span></span><br><span class="line">        <span class="comment">//6.1获取互斥锁</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> LOCK_SHOP_KEY + id;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">lock</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line">        <span class="comment">//这里锁的key和前面缓存的key不是同一个</span></span><br><span class="line">        <span class="comment">//6.2  判断是否获取锁</span></span><br><span class="line">        <span class="keyword">if</span> (lock) &#123;</span><br><span class="line">            <span class="comment">//检测reids缓存是否过期</span></span><br><span class="line">            <span class="type">LocalDateTime</span> <span class="variable">doubleCheckExpireTime</span> <span class="operator">=</span> redisData.getExpireTime();</span><br><span class="line">            <span class="keyword">if</span> (doubleCheckExpireTime.isAfter(LocalDateTime.now())) &#123;</span><br><span class="line">                <span class="keyword">return</span> r;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 6.3 开启独立线程，当前线程返回商铺信息</span></span><br><span class="line">            CACHE_REBUILD_EXECUTOR.submit(() -&gt; &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">//重建缓存</span></span><br><span class="line">                    <span class="comment">// 1.查询数据库</span></span><br><span class="line">                    <span class="type">R</span> <span class="variable">r1</span> <span class="operator">=</span> dbFallback.apply(id);</span><br><span class="line">                    <span class="comment">//2. 写入redis</span></span><br><span class="line">                    <span class="built_in">this</span>.setWithLogicalExpire(key, r1, time, timeUnit);</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    <span class="comment">//释放锁</span></span><br><span class="line">                    unlock(lockKey);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//6.4 未获取到锁</span></span><br><span class="line">        <span class="comment">//返回过期的商铺信息</span></span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//    互斥锁解决缓存击穿和缓存穿透</span></span><br><span class="line">    <span class="keyword">private</span> &lt;R, ID&gt; R <span class="title function_">queryWithMutex</span><span class="params">(String keyPrefix, ID id, Class&lt;R&gt; type, Function&lt;ID, R&gt; dbFallback, Long time, TimeUnit timeUnit)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> keyPrefix + id;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1.从redis里查询商铺缓存</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 判断缓存是否命中</span></span><br><span class="line">        <span class="keyword">if</span> (StrUtil.isNotBlank(json)) &#123;</span><br><span class="line">            <span class="comment">//3.命中，返回商铺信息</span></span><br><span class="line">            <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.判断是否命中空值</span></span><br><span class="line">        <span class="keyword">if</span> (json != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//返回错误信息</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4. 未命中，实现缓存重建</span></span><br><span class="line">        <span class="comment">//4.1 尝试获取互斥锁</span></span><br><span class="line">        <span class="comment">//这里锁的key和前面缓存的key不是同一个</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">lockKey</span> <span class="operator">=</span> LOCK_SHOP_KEY + id;</span><br><span class="line">        <span class="type">R</span> <span class="variable">r</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//4.2  判断是否获取锁</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">isLock</span> <span class="operator">=</span> tryLock(lockKey);</span><br><span class="line">            <span class="comment">//4.3 未获取到锁，休眠并重试</span></span><br><span class="line">            <span class="keyword">if</span> (!isLock) &#123;</span><br><span class="line">                Thread.sleep(<span class="number">50</span>);</span><br><span class="line">                <span class="keyword">return</span> queryWithMutex(keyPrefix, id, type, dbFallback, time, timeUnit);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//4.2 获取互斥锁成功</span></span><br><span class="line">            <span class="comment">//4.3 校验redis中是否存在，如果存在则无需重建缓存</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">doubleCheckShop</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().get(key);</span><br><span class="line">            <span class="keyword">if</span> (StrUtil.isNotBlank(doubleCheckShop)) &#123;</span><br><span class="line">                <span class="comment">//这里做doubleCheck</span></span><br><span class="line">                <span class="keyword">return</span> JSONUtil.toBean(json, type);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 4.4 获取到锁，根据id查询数据库</span></span><br><span class="line">            r = dbFallback.apply(id);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//模拟重建休眠延时</span></span><br><span class="line"><span class="comment">//            Thread.sleep(200);</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//5.判断数据库是否存在</span></span><br><span class="line">            <span class="keyword">if</span> (r == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">//6.数据库中不存在，将空值写入redis,返回错误信息</span></span><br><span class="line">                stringRedisTemplate.opsForValue().set(key, <span class="string">&quot;&quot;</span>, CACHE_NULL_TTL, TimeUnit.MINUTES);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//7. 数据库中存在，将其存入缓存</span></span><br><span class="line">            <span class="built_in">this</span>.set(key, JSONUtil.toJsonStr(r), time, timeUnit);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//8.释放互斥锁</span></span><br><span class="line">            unlock(LOCK_SHOP_KEY + id);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//9.返回</span></span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="优惠券秒杀"><a href="#优惠券秒杀" class="headerlink" title="优惠券秒杀"></a>优惠券秒杀</h3><h4 id="全局唯一ID"><a href="#全局唯一ID" class="headerlink" title="全局唯一ID"></a>全局唯一ID</h4><ul>
+<li><p>在各类购物App中，都会遇到商家发放的优惠券</p>
+</li>
+<li><p>当用户抢购时，就会生成订单并保存到<code>tb_voucher_order</code>这张表中，而订单表如果使用数据库自增ID就存在一些问题：</p>
+<ul>
+<li>id的规律性太明显</li>
+<li>受单表数据量的限制</li>
+</ul>
+</li>
+<li><p>如果我们的id具有太明显的规则，用户或者说商业对手很容易猜测出来我们的一些敏感信息，比如商城在一天时间内，卖出了多少单，这明显不合适。</p>
+</li>
+<li><p>随着我们商城规模越来越大，mysql的单表的容量不宜超过500W，数据量过大之后，我们要进行拆库拆表，但拆分表了之后，他们从逻辑上讲他们是同一张表，所以他们的id是不能一样的， 于是乎我们需要保证id的唯一性。</p>
+</li>
+<li><p>那就要引出我们的<strong>全局ID生成器</strong>，是一种在分布式系统下用来生成全局唯一ID的工具，一般要满足下列特性：</p>
+<ul>
+<li>唯一性</li>
+<li>高可用</li>
+<li>高性能</li>
+<li>递增性</li>
+<li>安全性</li>
+</ul>
+</li>
+<li><p>为了增加ID的安全性，我们可以不直接使用Redis自增的数值，而是拼接一些其他信息</p>
+</li>
+<li><p>ID组成部分</p>
+<ul>
+<li>符号位：1bit，永远为0</li>
+<li>时间戳：31bit，以秒为单位，可以使用69年（2^31秒约等于69 - 年）</li>
+<li>序列号：32bit，秒内的计数器，支持每秒传输2^32个不同ID</li>
+</ul>
+</li>
+<li><p>根据分析实现代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">//设置一下起始时间，时间戳就是起始时间与当前时间的秒数差</span></span><br><span class="line">    <span class="type">LocalDateTime</span> <span class="variable">tmp</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2022</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    System.out.println(tmp.toEpochSecond(ZoneOffset.UTC));</span><br><span class="line">    <span class="comment">//结果为1640995200L</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完整代码如下</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hmdp.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.ZoneOffset;</span><br><span class="line"><span class="keyword">import</span> java.time.format.DateTimeFormatter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成全局唯一id；</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisIdWorker</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开始时间戳</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">BEGIN_TIMESTAMP</span> <span class="operator">=</span> <span class="number">1640995200L</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 序列号的位数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">COUNT_BITS</span> <span class="operator">=</span> <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RedisIdWorker</span><span class="params">(StringRedisTemplate stringRedisTemplate)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.stringRedisTemplate = stringRedisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">nextId</span><span class="params">(String keyPrefix)</span> &#123;</span><br><span class="line">        <span class="comment">// 1.生成时间戳</span></span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line">        <span class="type">long</span> <span class="variable">nowSecond</span> <span class="operator">=</span> now.toEpochSecond(ZoneOffset.UTC);</span><br><span class="line">        <span class="type">long</span> <span class="variable">timestamp</span> <span class="operator">=</span> nowSecond - BEGIN_TIMESTAMP;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2.生成序列号</span></span><br><span class="line">        <span class="comment">// 2.1.获取当前日期，精确到天</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">date</span> <span class="operator">=</span> now.format(DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy:MM:dd&quot;</span>));</span><br><span class="line">        <span class="comment">// 2.2.自增长</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">count</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().increment(<span class="string">&quot;icr:&quot;</span> + keyPrefix + <span class="string">&quot;:&quot;</span> + date);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.拼接并返回</span></span><br><span class="line">        <span class="keyword">return</span> timestamp &lt;&lt; COUNT_BITS | count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="添加优惠券"><a href="#添加优惠券" class="headerlink" title="添加优惠券"></a>添加优惠券</h4><ul>
+<li>每个店铺度可以发布优惠券，分为平价券和特价券，平价券可以任意购买，而特价券需要秒杀抢购</li>
+<li>tb_voucher：优惠券的基本信息，优惠金额、使用规则等</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Type</th>
+<th align="center">Collation</th>
+<th align="center">Null</th>
+<th align="center">Key</th>
+<th align="center">Default</th>
+<th align="center">Extra</th>
+<th align="center">Comment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id</td>
+<td align="center">bigint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center">PRI</td>
+<td align="center">(NULL)</td>
+<td align="center">auto_increment</td>
+<td align="center">主键</td>
+</tr>
+<tr>
+<td align="center">shop_id</td>
+<td align="center">bigint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">商铺id</td>
+</tr>
+<tr>
+<td align="center">title</td>
+<td align="center">varchar(255)</td>
+<td align="center">utf8mb4_general_ci</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">代金券标题</td>
+</tr>
+<tr>
+<td align="center">sub_title</td>
+<td align="center">varchar(255)</td>
+<td align="center">utf8mb4_general_ci</td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">副标题</td>
+</tr>
+<tr>
+<td align="center">rules</td>
+<td align="center">varchar(1024)</td>
+<td align="center">utf8mb4_general_ci</td>
+<td align="center">YES</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">使用规则</td>
+</tr>
+<tr>
+<td align="center">pay_value</td>
+<td align="center">bigint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">支付金额，单位是分。例如200代表2元</td>
+</tr>
+<tr>
+<td align="center">actual_value</td>
+<td align="center">bigint</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">抵扣金额，单位是分。例如200代表2元</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">tinyint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0,普通券；<br>1,秒杀券</td>
+</tr>
+<tr>
+<td align="center">status</td>
+<td align="center">tinyint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">0,普通券；1,秒杀券</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED</td>
+<td align="center">0,普通券；1,秒杀券</td>
+</tr>
+<tr>
+<td align="center">update_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED<br>on update<br>CURRENT_TIMESTAMP</td>
+<td align="center">更新时间</td>
+</tr>
+</tbody></table>
+<ul>
+<li>tb_seckill_voucher：优惠券的库存、开始抢购时间，结束抢购时间。特价优惠券才需要填写这些信息</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Type</th>
+<th align="center">Collation</th>
+<th align="center">Null</th>
+<th align="center">Key</th>
+<th align="center">Default</th>
+<th align="center">Extra</th>
+<th align="center">Comment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">voucher_id</td>
+<td align="center">bigint<br>unsigned</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center">PRI</td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">关联的优惠券的id</td>
+</tr>
+<tr>
+<td align="center">stock</td>
+<td align="center">int</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">(NULL)</td>
+<td align="center"></td>
+<td align="center">库存</td>
+</tr>
+<tr>
+<td align="center">create_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED</td>
+<td align="center">创建时间</td>
+</tr>
+<tr>
+<td align="center">begin_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED</td>
+<td align="center">生效时间</td>
+</tr>
+<tr>
+<td align="center">end_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED</td>
+<td align="center">失效时间</td>
+</tr>
+<tr>
+<td align="center">update_time</td>
+<td align="center">timestamp</td>
+<td align="center">(NULL)</td>
+<td align="center">NO</td>
+<td align="center"></td>
+<td align="center">CURRENT_TIMESTAMP</td>
+<td align="center">DEFAULT_GENERATED<br>on update<br>CURRENT_TIMESTAMP</td>
+<td align="center">更新时间</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>平价券由于优惠力度并不是很大，所以是可以任意领取</p>
+</li>
+<li><p>而代金券由于优惠力度大，所以像第二种券，就得限制数量，从表结构上也能看出，特价券除了具有优惠券的基本信息以外，还具有库存，抢购时间，结束时间等等字段</p>
+</li>
+<li><p>添加优惠券的代码已经提供好了</p>
+<div class="tabs" id="tab1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#tab1-1">新增普通券</button></li><li class="tab"><button type="button" data-href="#tab1-2">新增秒杀券</button></li><li class="tab"><button type="button" data-href="#tab1-3">新增秒杀券业务逻辑</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="tab1-1"><p>新增普通券，也就只是将普通券的信息保存到表中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 新增普通券</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> voucher 优惠券信息</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 优惠券id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@PostMapping</span></span><br><span class="line">   <span class="keyword">public</span> Result <span class="title function_">addVoucher</span><span class="params">(<span class="meta">@RequestBody</span> Voucher voucher)</span> &#123;</span><br><span class="line">       voucherService.save(voucher);</span><br><span class="line">       <span class="keyword">return</span> Result.ok(voucher.getId());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-2"><p>新增秒杀券主要看<code>addSeckillVoucher</code>中的业务逻辑</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 新增秒杀券</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> voucher 优惠券信息，包含秒杀信息</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 优惠券id</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="meta">@PostMapping(&quot;seckill&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> Result <span class="title function_">addSeckillVoucher</span><span class="params">(<span class="meta">@RequestBody</span> Voucher voucher)</span> &#123;</span><br><span class="line">       voucherService.addSeckillVoucher(voucher);</span><br><span class="line">       <span class="keyword">return</span> Result.ok(voucher.getId());</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="tab1-3"><p>秒杀券可以看做是一种特殊的普通券，将普通券信息保存到普通券表中，同时将秒杀券的数据保存到秒杀券表中，通过券的ID进行关联</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addSeckillVoucher</span><span class="params">(Voucher voucher)</span> &#123;</span><br><span class="line">    <span class="comment">// 保存优惠券</span></span><br><span class="line">    save(voucher);</span><br><span class="line">    <span class="comment">// 保存秒杀信息</span></span><br><span class="line">    <span class="type">SeckillVoucher</span> <span class="variable">seckillVoucher</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SeckillVoucher</span>();</span><br><span class="line">    <span class="comment">// 关联普通券id</span></span><br><span class="line">    seckillVoucher.setVoucherId(voucher.getId());</span><br><span class="line">    <span class="comment">// 设置库存</span></span><br><span class="line">    seckillVoucher.setStock(voucher.getStock());</span><br><span class="line">    <span class="comment">// 设置开始时间</span></span><br><span class="line">    seckillVoucher.setBeginTime(voucher.getBeginTime());</span><br><span class="line">    <span class="comment">// 设置结束时间</span></span><br><span class="line">    seckillVoucher.setEndTime(voucher.getEndTime());</span><br><span class="line">    <span class="comment">// 保存信息到秒杀券表中</span></span><br><span class="line">    seckillVoucherService.save(seckillVoucher);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+</li>
+<li><p>由于这里并没有后台管理页面，所以我们只能用POSTMAN模拟发送请求来新增秒杀券，请求路径<a href="http://localhost:8081/voucher/seckill%EF%BC%8C">http://localhost:8081/voucher/seckill，</a> 请求方式POST，JSON数据如下，注意优惠券的截止日期设置，若优惠券过期，则不会在页面上显示。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;shopId&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span><span class="string">&quot;100元代金券&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;subTitle&quot;</span><span class="punctuation">:</span><span class="string">&quot;周一至周五可用&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;rules&quot;</span><span class="punctuation">:</span><span class="string">&quot;全场通用\\n无需预约\\n可无限叠加&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;payValue&quot;</span><span class="punctuation">:</span><span class="number">8000</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;actualValue&quot;</span><span class="punctuation">:</span><span class="number">10000</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stock&quot;</span><span class="punctuation">:</span><span class="number">100</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;beginTime&quot;</span><span class="punctuation">:</span><span class="string">&quot;2022-01-01T00:00:00&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;endTime&quot;</span><span class="punctuation">:</span><span class="string">&quot;2022-10-31T23:59:59&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/6491c61a1ddac507cc9b016d.jpg"></p>
+</li>
+</ul>
+<h3 id="实现秒杀下单"><a href="#实现秒杀下单" class="headerlink" title="实现秒杀下单"></a>实现秒杀下单</h3>]]></content>
       <categories>
         <category>编程学习</category>
       </categories>
@@ -4037,9 +4340,7 @@ mysql-bin.000001 |     1200</li>
   <entry>
     <title>SpringBoot事务失效的几种情况</title>
     <url>//2023/06/20/SpringBoot%E4%BA%8B%E5%8A%A1%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5/</url>
-    <content><![CDATA[<blockquote>
-<p>之前没有仔细了解过，今天写项目遇到了，加上百度搜的记录一下</p>
-</blockquote>
+    <content><![CDATA[<p>今天写项目遇到了，加上百度搜的记录一下</p>
 <ol>
 <li><p>内部调用失效<br>使用一个没有事务管理的方法调用一个有事务的方法，执行失败后不会进行回滚：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="keyword">public</span> R <span class="title function_">saveWithOrder</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> invokeSave(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> Long <span class="title function_">invokeSave</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> save(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4060,8 +4361,15 @@ mysql-bin.000001 |     1200</li>
 
 <ul>
 <li>解决方法就是拿到事务代理对象：<ol>
-<li>拿到当前对象代理对象  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ShopService</span> <span class="variable">proxy</span> <span class="operator">=</span> (ShopService) AopContext.currentProxy();</span><br></pre></td></tr></table></figure></li>
-<li>使用代理对象调用方法,此时该方法就会被spring管理。那么内部事务自然也会生效  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> proxy.invokeSave(id);</span><br></pre></td></tr></table></figure></li>
+<li><p>拿到当前对象代理对象</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ShopService</span> <span class="variable">proxy</span> <span class="operator">=</span> (ShopService) AopContext.currentProxy();</span><br></pre></td></tr></table></figure></li>
+<li><p>使用代理对象调用方法,此时该方法就会被spring管理。那么内部事务自然也会生效</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> proxy.invokeSave(id);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加依赖</p>
+  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>启动类上加上<code>EnableAspectJAutoProxy</code>注解暴露代理对象</p>
+  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableAspectJAutoProxy(exposeProxy = true)</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
@@ -4105,7 +4413,7 @@ mysql-bin.000001 |     1200</li>
 这样能解决问题么？答案是能。</li>
 </ul>
 <p>但是这种方式并不是最正确的解决方案，因为两个地方同时定义了一个bean ，使用bean的覆盖重写其实在某种情况下是很可能出事的。</p>
-<p>经过一个小时查询，最终发现是项目里的其他模块的<code>bean</code>影响到了在使用的模块，将其他模块移除，正常运行。</p>
+<p>找了半个多小时，发现是项目里的其他模块的<code>bean</code>影响到了在使用的模块，将其他模块移除，正常运行。<br>闹心</p>
 ]]></content>
       <tags>
         <tag>BUG分享</tag>
