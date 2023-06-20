@@ -4041,15 +4041,27 @@ mysql-bin.000001 |     1200</li>
 <p>之前没有仔细了解过，今天写项目遇到了，加上百度搜的记录一下</p>
 </blockquote>
 <ol>
-<li>内部调用失效<br>使用一个没有事务管理的方法调用一个有事务的方法，执行失败后不会进行回滚：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line">  <span class="keyword">public</span> Integer <span class="title function_">delete</span><span class="params">(Shop shop)</span>&#123;</span><br><span class="line">      <span class="type">int</span> <span class="variable">delete</span> <span class="operator">=</span> mapper.delete(shop);</span><br><span class="line">      <span class="keyword">return</span> delete;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">invokeDelete</span><span class="params">(Shop shop)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> delete(shop);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li><p>这时因为Spring AOP默认使用<code>动态代理</code>，会给被代理的类生成一个代理类，事务相关的操作都通过代理来完成，使用内部方法调用时，使用的是实例调用，没有通过代理类调用方法，因此事务不会检测到失败。</p>
+<li><p>内部调用失效<br>使用一个没有事务管理的方法调用一个有事务的方法，执行失败后不会进行回滚：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="keyword">public</span> R <span class="title function_">saveWithOrder</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> invokeSave(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> Long <span class="title function_">invokeSave</span><span class="params">(Long id)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> save(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>解决方法就是使用代理类调用事务方法：</p>
-<ol>
-<li>在类内部注入本类  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> IShopTypeService iShopTypeService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">invokeDelete</span><span class="params">(Shop shop)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> delete(shop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>通过<code>ApplicationContext</code>引入  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">((IShopTypeService)AopContext.currentProxy()).invokeUpdate(Shop shop);</span><br></pre></td></tr></table></figure></li>
+<li><p>当前给<code>invokeSave</code>加了事务，而没有给外面的<code>saveWithOrder</code>加上事务</p>
+</li>
+<li><p>而saveWithOrder调用invokeSave时，实际上是使用 <code>this</code>: </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="built_in">this</span>.invokeSave(id);</span><br></pre></td></tr></table></figure></li>
+<li><p>而this拿到的是当前类对象，而不是当前类的代理对象</p>
+</li>
+<li><p>那么事务要生效，是Spring对当前类做了动态代理，拿到当前类的代理对象，做出了事务处理</p>
+</li>
+<li><p>而当前this使用的是非代理对象，所以是没有事务功能的，也就会导致<code>invokeSave</code>方法的事务管理失效</p>
+</li>
+</ol>
+<br>
+
+<ul>
+<li>解决方法就是拿到事务代理对象：<ol>
+<li>拿到当前对象代理对象  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ShopService</span> <span class="variable">proxy</span> <span class="operator">=</span> (ShopService) AopContext.currentProxy();</span><br></pre></td></tr></table></figure></li>
+<li>使用代理对象调用方法,此时该方法就会被spring管理。那么内部事务自然也会生效  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> proxy.invokeSave(id);</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
