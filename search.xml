@@ -6674,6 +6674,7 @@ mysql-bin.000001 |     1200</li>
 </ul>
 <h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><ol>
 <li>导入依赖</li>
+<li>创建SpringMVC控制器类</li>
 <li></li>
 </ol>
 ]]></content>
