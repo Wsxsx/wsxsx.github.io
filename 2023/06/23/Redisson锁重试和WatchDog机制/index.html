@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><!-- hexo injector head_begin start -->
+<link rel="stylesheet" href="/css/bilicard.css">
+<!-- hexo injector head_begin end --><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Redisson锁重试和WatchDog机制 | 无事小神仙</title><meta name="author" content="小神仙"><meta name="copyright" content="小神仙"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Redisson锁重试和WatchDog机制  前面我们分析的是空参的tryLock方法，现在我们来分析一下这个带参数的  继续跟tryLock进来以后先看首先做了什么 12345678910@Overridepublic boolean tryLock(long waitTime, long leaseTime, TimeUnit unit) throws InterruptedExceptio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redisson锁重试和WatchDog机制">
+<meta property="og:url" content="http://example.com/2023/06/23/Redisson%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8CWatchDog%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="无事小神仙">
+<meta property="og:description" content="Redisson锁重试和WatchDog机制  前面我们分析的是空参的tryLock方法，现在我们来分析一下这个带参数的  继续跟tryLock进来以后先看首先做了什么 12345678910@Overridepublic boolean tryLock(long waitTime, long leaseTime, TimeUnit unit) throws InterruptedExceptio">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png">
+<meta property="article:published_time" content="2023-06-23T14:53:06.000Z">
+<meta property="article:modified_time" content="2023-06-23T14:55:53.300Z">
+<meta property="article:author" content="小神仙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png"><link rel="shortcut icon" href="/img/jinzhi.png"><link rel="canonical" href="http://example.com/2023/06/23/Redisson%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8CWatchDog%E6%9C%BA%E5%88%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":200,"languages":{"author":"作者: 小神仙","link":"链接: ","source":"来源: 无事小神仙","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redisson锁重试和WatchDog机制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-06-23 22:55:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><style>#article-container.post-content h1:before, h2:before, h3:before, h4:before, h5:before, h6:before { -webkit-animation: avatar_turn_around 1s linear infinite; -moz-animation: avatar_turn_around 1s linear infinite; -o-animation: avatar_turn_around 1s linear infinite; -ms-animation: avatar_turn_around 1s linear infinite; animation: avatar_turn_around 1s linear infinite; }</style><link rel="stylesheet" href="/css/footer.css"><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/xxx.css"><link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4094414_73kixp1pncg.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bibi/"><i class="fa-fw icon-message"></i><span> 闲言碎语</span></a></li><li><a class="site-page child" href="/lvlv/"><i class="fa-fw icon-xinxinxiangdong"></i><span> 驴驴日记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png')"><nav id="nav"><span id="blog-info"><a href="/" title="无事小神仙"><span class="site-name">无事小神仙</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bibi/"><i class="fa-fw icon-message"></i><span> 闲言碎语</span></a></li><li><a class="site-page child" href="/lvlv/"><i class="fa-fw icon-xinxinxiangdong"></i><span> 驴驴日记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redisson锁重试和WatchDog机制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-23T14:53:06.000Z" title="发表于 2023-06-23 22:53:06">2023-06-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-23T14:55:53.300Z" title="更新于 2023-06-23 22:55:53">2023-06-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redisson锁重试和WatchDog机制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Redisson锁重试和WatchDog机制</p>
+<ul>
+<li><p>前面我们分析的是空参的tryLock方法，现在我们来分析一下这个带参数的</p>
+</li>
+<li><p>继续跟tryLock<br>进来以后先看首先做了什么</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="comment">//首先将等待时间转为毫秒，后面操作都是以毫秒为单位</span></span><br><span class="line">    <span class="type">long</span> <span class="variable">time</span> <span class="operator">=</span> unit.toMillis(waitTime);</span><br><span class="line">    <span class="comment">//获取当前时间</span></span><br><span class="line">    <span class="type">long</span> <span class="variable">current</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">    <span class="comment">//获取线程id，也就是每个线程独特的标识</span></span><br><span class="line">    <span class="type">long</span> <span class="variable">threadId</span> <span class="operator">=</span> Thread.currentThread().getId();</span><br><span class="line">    <span class="comment">//获取锁，从tryAcquire开始业务逻辑</span></span><br><span class="line">    <span class="type">Long</span> <span class="variable">ttl</span> <span class="operator">=</span> tryAcquire(waitTime, leaseTime, unit, threadId);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继续跟<code>tryAcquire</code>,进来可以看到<code>tryAcquire</code>又调用了<code>tryAcquireAsync</code>，继续跟</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Long <span class="title function_">tryAcquire</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> get(tryAcquireAsync(waitTime, leaseTime, unit, threadId));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>到这里可以看到，一开始的业务逻辑了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> &lt;T&gt; RFuture&lt;Long&gt; <span class="title function_">tryAcquireAsync</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">    <span class="comment">//首先判断锁施放时间是否是永久</span></span><br><span class="line">    <span class="keyword">if</span> (leaseTime != -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tryLockInnerAsync(waitTime, leaseTime, unit, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果不是-1，这里会给释放时间一个默认值，通过getLockWatchdogTimeout的源码可以得知，是30*1000毫秒，也就是30秒</span></span><br><span class="line">    RFuture&lt;Long&gt; ttlRemainingFuture = tryLockInnerAsync(waitTime,</span><br><span class="line">                                            commandExecutor.getConnectionManager().getCfg().getLockWatchdogTimeout(),</span><br><span class="line">                                            TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/6495969d1ddac507cc0fa812.jpg"></p>
+</li>
+<li><p>继续跟入<code>tryLockInnerAsync</code></p>
+</li>
+<li><p>通过源码可以得知，获取锁成功返回的是<code>nil</code>，而获取锁失败则返回的是锁的剩余有效期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt; RFuture&lt;T&gt; <span class="title function_">tryLockInnerAsync</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId, RedisStrictCommand&lt;T&gt; command)</span> &#123;</span><br><span class="line">    <span class="comment">//首先将施放时间记录到常量</span></span><br><span class="line">        internalLockLeaseTime = unit.toMillis(leaseTime);</span><br><span class="line">    <span class="comment">//执行lua脚本，成功则返回nil，nil可以理解为null，如果获取锁失败则返回锁剩余有效期和key名称</span></span><br><span class="line">        <span class="keyword">return</span> evalWriteAsync(getName(), LongCodec.INSTANCE, command,</span><br><span class="line">                <span class="string">&quot;if (redis.call(&#x27;exists&#x27;, KEYS[1]) == 0) then &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;redis.call(&#x27;hincrby&#x27;, KEYS[1], ARGV[2], 1); &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;redis.call(&#x27;pexpire&#x27;, KEYS[1], ARGV[1]); &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;return nil; &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;end; &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;if (redis.call(&#x27;hexists&#x27;, KEYS[1], ARGV[2]) == 1) then &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;redis.call(&#x27;hincrby&#x27;, KEYS[1], ARGV[2], 1); &quot;</span> +</span><br><span class="line">                        <span class="comment">//这里是发送锁执行成功的通知</span></span><br><span class="line">                        <span class="string">&quot;redis.call(&#x27;pexpire&#x27;, KEYS[1], ARGV[1]); &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;return nil; &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;end; &quot;</span> +</span><br><span class="line">                        <span class="string">&quot;return redis.call(&#x27;pttl&#x27;, KEYS[1]);&quot;</span>,</span><br><span class="line">                Collections.singletonList(getName()), internalLockLeaseTime, getLockName(threadId));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>而拿到剩余有效期有啥用呢？往回倒一下看看</p>
+</li>
+<li><p>可以看到刚才tryLockInnerAsync的返回值是一个<code>Future</code>，异步函数，只管发出去了，return的也是一个<code>Future</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RFuture&lt;Long&gt; ttlRemainingFuture = tryLockInnerAsync(waitTime,</span><br><span class="line">                                                commandExecutor.getConnectionManager().getCfg().getLockWatchdogTimeout(),</span><br><span class="line">                                                TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后将这个结果返回到一开始看到的<code>tryAcquire</code>方法，他的返回值是long类型的，就是锁的有效期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Long <span class="title function_">tryAcquire</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> get(tryAcquireAsync(waitTime, leaseTime, unit, threadId));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>继续返回到<code>tryLock</code>，也就是最开始我们看到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">time</span> <span class="operator">=</span> unit.toMillis(waitTime);</span><br><span class="line">    <span class="type">long</span> <span class="variable">current</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">    <span class="type">long</span> <span class="variable">threadId</span> <span class="operator">=</span> Thread.currentThread().getId();</span><br><span class="line">    <span class="comment">//这里返回锁的有效期</span></span><br><span class="line">    <span class="type">Long</span> <span class="variable">ttl</span> <span class="operator">=</span> tryAcquire(waitTime, leaseTime, unit, threadId);</span><br><span class="line">    <span class="comment">// 进来判断，是null吗，根据刚才看的源码，成功返回nil，那么直接直接返回true就可以了</span></span><br><span class="line">    <span class="keyword">if</span> (ttl == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//实际上就是 time - 消耗时间， 如果time&lt;0 则说明时间用完了，直接返回false，否则重试</span></span><br><span class="line">    time -= System.currentTimeMillis() - current;</span><br><span class="line">    <span class="keyword">if</span> (time &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        acquireFailed(waitTime, unit, threadId);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//再次拿到当前时间</span></span><br><span class="line">     current = System.currentTimeMillis();</span><br><span class="line">     <span class="comment">//这里订阅了别的线程释放锁的通知。也就是前面lua脚本中的   &quot;redis.call(&#x27;pexpire&#x27;, KEYS[1], ARGV[1]); &quot; </span></span><br><span class="line">    RFuture&lt;RedissonLockEntry&gt; subscribeFuture = subscribe(threadId);</span><br><span class="line">    <span class="comment">//这里用的是 Futrue.await进行等待，在锁的剩余等待最大时间结束前完成，返回true，否则返回false</span></span><br><span class="line">    <span class="keyword">if</span> (!subscribeFuture.await(time, TimeUnit.MILLISECONDS)) &#123;</span><br><span class="line">        <span class="comment">//false就进到这里</span></span><br><span class="line">        <span class="keyword">if</span> (!subscribeFuture.cancel(<span class="literal">false</span>)) &#123;</span><br><span class="line">            subscribeFuture.onComplete((res, e) -&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span> (e == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//首先取消订阅消息</span></span><br><span class="line">                    unsubscribe(subscribeFuture, threadId);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        acquireFailed(waitTime, unit, threadId);</span><br><span class="line">        <span class="comment">//返回false结果</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果不是false进到这里</span></span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//再次计算上面的逻辑消耗了多长时间</span></span><br><span class="line">        time -= System.currentTimeMillis() - current;</span><br><span class="line">        <span class="keyword">if</span> (time &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            acquireFailed(waitTime, unit, threadId);</span><br><span class="line">            <span class="comment">//如果超时了返回false，太TM严谨了</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="comment">//终于进入到重试逻辑了</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">//再次获取当前时间</span></span><br><span class="line">            <span class="type">long</span> <span class="variable">currentTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">            <span class="comment">//再次tryAcquire，同上面的一样，这是进行重试了</span></span><br><span class="line">            ttl = tryAcquire(waitTime, leaseTime, unit, threadId);</span><br><span class="line">            <span class="comment">// 再次进行判断，别忘了，ttl返回null等于成功</span></span><br><span class="line">            <span class="keyword">if</span> (ttl == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果失败了，再次计算锁剩余时间还够不够，不够的返回false</span></span><br><span class="line">            time -= System.currentTimeMillis() - currentTime;</span><br><span class="line">            <span class="keyword">if</span> (time &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                acquireFailed(waitTime, unit, threadId);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//就算是重试也不能直接重试，这里再次使用到了 Futrue 进行尝试，也就是异步操作</span></span><br><span class="line">               <span class="comment">// waiting for message</span></span><br><span class="line">            currentTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">if</span> (ttl &gt;= <span class="number">0</span> &amp;&amp; ttl &lt; time) &#123;</span><br><span class="line">                <span class="comment">//getLatch信号量，释放锁会释放一个信号，这边接收到信号后会再次进行尝试</span></span><br><span class="line">                <span class="comment">//再次尝试也有等待时间，如果超过了等待时间，会返回false，在时间内拿到锁的话，则会返回true</span></span><br><span class="line">                <span class="comment">//而这个等待时间，两种：1.ttl(锁释放时间) &lt; time(剩余等待时间),就使用ttl</span></span><br><span class="line">                subscribeFuture.getNow().getLatch().tryAcquire(ttl, TimeUnit.MILLISECONDS);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//反之，则使用 time </span></span><br><span class="line">                subscribeFuture.getNow().getLatch().tryAcquire(time, TimeUnit.MILLISECONDS);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//这边等到醒了，再次校验时间</span></span><br><span class="line">            time -= System.currentTimeMillis() - currentTime;</span><br><span class="line">            <span class="keyword">if</span> (time &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                acquireFailed(waitTime, unit, threadId);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>如果时间还有，那么就返回到上面的 <code>while(true)</code> ，继续循环    </p>
+</li>
+<li><p>那么这里并不是无休止的等待，而是使用了<code>消息订阅</code>和<code>信号量</code>机制，你那边释放锁了，我这边再过去试一下，而并不是失败了就继续尝试，那样会增加不必要的消耗，大概可以理解为抢凳子游戏。</p>
+</li>
+<li><p>重试是解决了，那么超时呢，假设现在A是获取锁成功了，有一个剩余的有效期，A业务阻塞了，B的线程看A的ttl到期了，过来拿到了锁，也会发生线程安全问题</p>
+</li>
+<li><p>必须要确保锁是因为业务执行完到期才释放的， 而不能是因为到期了才释放</p>
+</li>
+<li><p>这里跟入 <code>tryAcquire</code>,继续跟入<code>tryAcquireAsync</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> &lt;T&gt; RFuture&lt;Long&gt; <span class="title function_">tryAcquireAsync</span><span class="params">(<span class="type">long</span> waitTime, <span class="type">long</span> leaseTime, TimeUnit unit, <span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (leaseTime != -<span class="number">1</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> tryLockInnerAsync(waitTime, leaseTime, unit, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//这里leaseTime等于-1的时候会用默认的时间，前面提到过，看门狗getLockWatchdogTimeout，默认是三十秒</span></span><br><span class="line">       RFuture&lt;Long&gt; ttlRemainingFuture = tryLockInnerAsync(waitTime,</span><br><span class="line">                                               commandExecutor.getConnectionManager().getCfg().getLockWatchdogTimeout(),</span><br><span class="line">                                               TimeUnit.MILLISECONDS, threadId, RedisCommands.EVAL_LONG);</span><br><span class="line">       <span class="comment">//当上面的 ttlRemainingFuture 成功后进来，两个参数就是剩余有效期和异常</span></span><br><span class="line">       ttlRemainingFuture.onComplete((ttlRemaining, e) -&gt; &#123;</span><br><span class="line">           <span class="comment">//这里说明抛异常了，那么什么也不做</span></span><br><span class="line">           <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//如果说剩余有效期等于null说明获取锁成功了</span></span><br><span class="line">           <span class="comment">// lock acquired</span></span><br><span class="line">           <span class="keyword">if</span> (ttlRemaining == <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="comment">//这里进行非常关键的一步， 到期续约</span></span><br><span class="line">               scheduleExpirationRenewal(threadId);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       <span class="keyword">return</span> ttlRemainingFuture;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跟进去<code>scheduleExpirationRenewal</code>看一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">scheduleExpirationRenewal</span><span class="params">(<span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">        <span class="type">ExpirationEntry</span> <span class="variable">entry</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExpirationEntry</span>();</span><br><span class="line">        <span class="comment">//这里使用的 static final ConcurrentMap&lt;String, RedissonLock.ExpirationEntry&gt;</span></span><br><span class="line">        <span class="comment">//跟进去getEntryName得知是：id + name，而name是当前锁的name，而static说明，这个类的所有实例都可以看到这个hashMapper</span></span><br><span class="line">        <span class="comment">//也就是说，每个锁都有自己的名字，在mapper中都会有自己的entry，一把锁对应一个entry，不重复</span></span><br><span class="line">        <span class="comment">//putIfAbsent说明，如果第一次来，不存在，我再存入，如果存在，则不执行，也就说如果是重入，返回的则是旧的entry，也就锁第一次来的时候创建的entry</span></span><br><span class="line">        <span class="comment">//也就是说，不管重试多少次，使用的都是同一个entry</span></span><br><span class="line">        <span class="type">ExpirationEntry</span> <span class="variable">oldEntry</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.putIfAbsent(getEntryName(), entry);</span><br><span class="line">        <span class="keyword">if</span> (oldEntry != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//这边来了个新的线程，加入进去</span></span><br><span class="line">            oldEntry.addThreadId(threadId);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//如果第一次来</span></span><br><span class="line">            entry.addThreadId(threadId);</span><br><span class="line">            <span class="comment">//那么做一个续约，更新有效期</span></span><br><span class="line">            renewExpiration();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里跟进去<code>renewExpiration</code></p>
+</li>
+<li><p>这个对象里封装了两样东西，一个是当前<code>线程id</code>，一个就是<code>定时任务</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">renewExpiration</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//获取 entry，      </span></span><br><span class="line">        <span class="type">ExpirationEntry</span> <span class="variable">ee</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.get(getEntryName());</span><br><span class="line">        <span class="keyword">if</span> (ee == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Timout ，超时任务，定时任务</span></span><br><span class="line">        <span class="comment">//这里newTimeout有两个参数，第一个是它本身，第二个则是到期以后才会执行</span></span><br><span class="line">        <span class="comment">//下面表明了 internalLockLeaseTime / 3, TimeUnit.MILLISECONDS ，就是内部锁的释放时间 / 3</span></span><br><span class="line">        <span class="comment">//internalLockLeaseTime下面图有标注怎么来的 30 /3 ，就是说10秒钟他执行下面的逻辑</span></span><br><span class="line">        <span class="type">Timeout</span> <span class="variable">task</span> <span class="operator">=</span> commandExecutor.getConnectionManager().newTimeout(<span class="keyword">new</span> <span class="title class_">TimerTask</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">(Timeout timeout)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">                <span class="comment">//拿出entry</span></span><br><span class="line">                <span class="type">ExpirationEntry</span> <span class="variable">ent</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.get(getEntryName());</span><br><span class="line">                <span class="keyword">if</span> (ent == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//从entry获取线程id</span></span><br><span class="line">                <span class="type">Long</span> <span class="variable">threadId</span> <span class="operator">=</span> ent.getFirstThreadId();</span><br><span class="line">                <span class="keyword">if</span> (threadId == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//刷新有效期</span></span><br><span class="line">                RFuture&lt;Boolean&gt; future = renewExpirationAsync(threadId);</span><br><span class="line">                future.onComplete((res, e) -&gt; &#123;</span><br><span class="line">                    <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">                        log.error(<span class="string">&quot;Can&#x27;t update lock &quot;</span> + getName() + <span class="string">&quot; expiration&quot;</span>, e);</span><br><span class="line">                        <span class="keyword">return</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//重置完有效期后，有调用了自己，递归</span></span><br><span class="line">                    <span class="comment">//也就是说，每隔十秒，执行一次，执行开始时又进行定时</span></span><br><span class="line">                    <span class="keyword">if</span> (res) &#123;</span><br><span class="line">                        <span class="comment">// reschedule itself</span></span><br><span class="line">                        renewExpiration();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, internalLockLeaseTime / <span class="number">3</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//最后将任务放入到entry去</span></span><br><span class="line">        ee.setTimeout(task);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/6495a84f1ddac507cc318648.jpg"></p>
+</li>
+<li><p>接上一个的跟入<code>renewExpirationAsync</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> RFuture&lt;Boolean&gt; <span class="title function_">renewExpirationAsync</span><span class="params">(<span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> evalWriteAsync(getName(), LongCodec.INSTANCE, RedisCommands.EVAL_BOOLEAN,</span><br><span class="line">      <span class="comment">//如果这把锁是的当前线程的，我寻思不是也进不来不是</span></span><br><span class="line">              <span class="string">&quot;if (redis.call(&#x27;hexists&#x27;, KEYS[1], ARGV[2]) == 1) then &quot;</span> +</span><br><span class="line">              <span class="comment">//重点来了，重置有效期，重新计时了</span></span><br><span class="line">                      <span class="string">&quot;redis.call(&#x27;pexpire&#x27;, KEYS[1], ARGV[1]); &quot;</span> +</span><br><span class="line">                      <span class="string">&quot;return 1; &quot;</span> +</span><br><span class="line">                      <span class="string">&quot;end; &quot;</span> +</span><br><span class="line">                      <span class="string">&quot;return 0;&quot;</span>,</span><br><span class="line">              Collections.singletonList(getName()),</span><br><span class="line">              internalLockLeaseTime, getLockName(threadId));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时我们再回来看<code>scheduleExpirationRenewal</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">scheduleExpirationRenewal</span><span class="params">(<span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">     <span class="type">ExpirationEntry</span> <span class="variable">entry</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExpirationEntry</span>();</span><br><span class="line">     <span class="type">ExpirationEntry</span> <span class="variable">oldEntry</span> <span class="operator">=</span> EXPIRATION_RENEWAL_MAP.putIfAbsent(getEntryName(), entry);</span><br><span class="line">     <span class="keyword">if</span> (oldEntry != <span class="literal">null</span>) &#123;</span><br><span class="line">         <span class="comment">// 不是第一次已经在持续执行了定时任务,就不用再调用了</span></span><br><span class="line">         oldEntry.addThreadId(threadId);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         entry.addThreadId(threadId);</span><br><span class="line">         <span class="comment">//而第一次进来需要执行定时任务</span></span><br><span class="line">         renewExpiration();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在我们再来看一下释放锁的逻辑<code>unlockAsync</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> RFuture&lt;Void&gt; <span class="title function_">unlockAsync</span><span class="params">(<span class="type">long</span> threadId)</span> &#123;</span><br><span class="line">      RPromise&lt;Void&gt; result = <span class="keyword">new</span> <span class="title class_">RedissonPromise</span>&lt;Void&gt;();</span><br><span class="line">      <span class="comment">//释放锁获取 futrue </span></span><br><span class="line">      RFuture&lt;Boolean&gt; future = unlockInnerAsync(threadId);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Futrue 成功后会执行下面逻辑</span></span><br><span class="line">      future.onComplete((opStatus, e) -&gt; &#123;</span><br><span class="line">          <span class="comment">//取消更新任务</span></span><br><span class="line">          cancelExpirationRenewal(threadId);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (e != <span class="literal">null</span>) &#123;</span><br><span class="line">              result.tryFailure(e);</span><br><span class="line">              <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (opStatus == <span class="literal">null</span>) &#123;</span><br><span class="line">              <span class="type">IllegalMonitorStateException</span> <span class="variable">cause</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IllegalMonitorStateException</span>(<span class="string">&quot;attempt to unlock lock, not locked by current thread by node id: &quot;</span></span><br><span class="line">                      + id + <span class="string">&quot; thread-id: &quot;</span> + threadId);</span><br><span class="line">              result.tryFailure(cause);</span><br><span class="line">              <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          result.trySuccess(<span class="literal">null</span>);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>取消定时任务逻辑<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/6495b12e1ddac507cc3f2b44.jpg"></p>
+</li>
+<li><p>到这里就结束了</p>
+<blockquote>
+<p>感慨一下大佬的思维模式,太顶了,像是订阅机制或者是基于HashMap实现的Entry的思想都是非常值得学习借鉴的.</p>
+</blockquote>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">小神仙</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/06/23/Redisson%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8CWatchDog%E6%9C%BA%E5%88%B6/">http://example.com/2023/06/23/Redisson%E9%94%81%E9%87%8D%E8%AF%95%E5%92%8CWatchDog%E6%9C%BA%E5%88%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">无事小神仙</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 支持</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/mayi.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/mayi.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/06/27/spring/" title="spring"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">spring</div></div></a></div><div class="next-post pull-right"><a href="/2023/06/20/SpringBoot%E4%BA%8B%E5%8A%A1%E5%A4%B1%E6%95%88%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5/" title="SpringBoot事务失效的几种情况"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBoot事务失效的几种情况</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">小神仙</div><div class="author-info__description">偷得浮生半日闲，我是无事小神仙</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>My Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/2945137386@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>驴驴黑作坊告示牌</span></div><div class="announcement_content">欢迎来到驴驴的黑作坊，留下打黑工吧！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/02/Autowired%E6%B3%A8%E5%85%A5%E5%A4%B1%E8%B4%A5/" title="Autowired注入失败"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Autowired注入失败"/></a><div class="content"><a class="title" href="/2023/09/02/Autowired%E6%B3%A8%E5%85%A5%E5%A4%B1%E8%B4%A5/" title="Autowired注入失败">Autowired注入失败</a><time datetime="2023-09-02T09:30:46.000Z" title="发表于 2023-09-02 17:30:46">2023-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/30/spring%E5%AE%9E%E4%BE%8B%E5%8C%96bean%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="spring实例化bean的三种方式"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="spring实例化bean的三种方式"/></a><div class="content"><a class="title" href="/2023/07/30/spring%E5%AE%9E%E4%BE%8B%E5%8C%96bean%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="spring实例化bean的三种方式">spring实例化bean的三种方式</a><time datetime="2023-07-30T14:35:51.000Z" title="发表于 2023-07-30 22:35:51">2023-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/30/mybatis%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" title="mybatis一级缓存和二级缓存"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="mybatis一级缓存和二级缓存"/></a><div class="content"><a class="title" href="/2023/07/30/mybatis%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" title="mybatis一级缓存和二级缓存">mybatis一级缓存和二级缓存</a><time datetime="2023-07-30T14:33:54.000Z" title="发表于 2023-07-30 22:33:54">2023-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/30/mybatis%E7%A7%8D#%E5%92%8C$%E5%8C%BA%E5%88%AB/" title="mybatis种#和$区别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="mybatis种#和$区别"/></a><div class="content"><a class="title" href="/2023/07/30/mybatis%E7%A7%8D#%E5%92%8C$%E5%8C%BA%E5%88%AB/" title="mybatis种#和$区别">mybatis种#和$区别</a><time datetime="2023-07-30T14:31:41.000Z" title="发表于 2023-07-30 22:31:41">2023-07-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/16/springboot%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E6%89%BE%E5%88%B0bean/" title="springboot启动创建bean报错"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://pic.imgdb.cn/item/647e86ea1ddac507cc0a3cb7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="springboot启动创建bean报错"/></a><div class="content"><a class="title" href="/2023/07/16/springboot%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E6%89%BE%E5%88%B0bean/" title="springboot启动创建bean报错">springboot启动创建bean报错</a><time datetime="2023-07-16T01:37:34.000Z" title="发表于 2023-07-16 09:37:34">2023-07-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By 小神仙</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎进入驴驴的黑作坊，留下打黑工吧！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'CKqAyRa2Lop5GEd9QAAbTjiR-MdYXbMMI',
+      appKey: '4ayKPYbuSRZ6rzdp6vt4ZD4U',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="/js/snowflake.js"></script><script src="/js/foot.js"></script><script defer src="https://rmt.dogedoge.com/fetch/~/source/jsdelivr/npm/jquery@latest/dist/jquery.min.js"></script><script defer data-pjax src="https://gcore.jsdelivr.net/gh/sirxemic/jquery.ripples/dist/jquery.ripples.js"></script><script defer data-pjax src="/js/ripples.js"></script><script src="/js/fish.js"></script><script async src="/js/title.js"></script><script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script><script type="text/javascript" src="https://unpkg.com/artitalk"></script><script src="/js/visitor.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"]):not([href="/no-pjax/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body></html>

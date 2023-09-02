@@ -1,0 +1,1 @@
+var titleTime,OriginTitile=document.title;document.addEventListener("visibilitychange",(function(){document.hidden?(document.title="👀坏了，网站崩溃了~",clearTimeout(titleTime)):(document.title="🐖哈哈，骗你的～",titleTime=setTimeout((function(){document.title=OriginTitile}),2e3))}));
